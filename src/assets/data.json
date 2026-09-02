@@ -1,0 +1,340 @@
+{
+  "slides": [
+    {
+      "id": "1",
+      "title": "Seguridad Fisica",
+      "text": "Personal altamente capacitado brinda protección presencial en instalaciones comerciales y residenciales. Garantizamos control de acceso, rondas preventivas y respuesta inmediata ante cualquier eventualidad las 24 horas del día.",
+      "imageDesktop": "images/generated-image01.webp",
+      "imageMobile": "images/generated-image01-mf.webp",
+      "linkText": "Learn More",
+      "linkUrl": "#"
+    },
+    {
+      "id": "2",
+      "title": "Central de Monitoreo",
+      "text": "Centro de monitoreo operando 24/7 con tecnología avanzada y personal especializado. Coordinamos operaciones de seguridad, gestionamos alarmas y videoseguridad en tiempo real para respuesta inmediata ante emergencias.",
+      "imageDesktop": "images/generated-image02.webp",
+      "imageMobile": "images/generated-image02-mf.webp",
+      "linkText": "Learn More",
+      "linkUrl": "#"
+    },
+    {
+      "id": "3",
+      "title": "Seguridad Complejos Residenciales",
+      "text": "Vigilancia especializada para conjuntos residenciales con protocolos de propiedad horizontal. Ofrecemos guardas certificados, control de ingreso de visitantes, monitoreo de zonas comunes y atención permanente para tranquilidad de los residentes.",
+      "imageDesktop": "images/generated-image03.webp",
+      "imageMobile": "images/generated-image03-mf.webp",
+      "linkText": "Learn More",
+      "linkUrl": "#"
+    },
+    {
+      "id": "4",
+      "title": "Servicio de monitoreo de CCTV",
+      "text": "Monitoreo remoto de cámaras de seguridad desde nuestro centro de control. Supervisión continua de imágenes en tiempo real, detección de actividades sospechosas y almacenamiento seguro de grabaciones para documentación y evidencia.",
+      "imageDesktop": "images/generated-image04.webp",
+      "imageMobile": "images/generated-image04-mf.webp",
+      "linkText": "Learn More",
+      "linkUrl": "#"
+    },
+    {
+      "id": "5",
+      "title": "Supervision Motorizada",
+      "text": "Patrullaje motorizado con escoltas certificados para desplazamientos ágiles y respuesta rápida. Ideal para supervisión de amplias zonas, reconocimiento de rutas y atención prioritaria a emergencias con máxima movilidad.",
+      "imageDesktop": "images/generated-image05.webp",
+      "imageMobile": "images/generated-image05-mf.webp",
+      "linkText": "Learn More",
+      "linkUrl": "#"
+    },
+    {
+      "id": "6",
+      "title": "Patrulla Movil",
+      "text": "Servicio de patrullaje vehicular para cobertura de extensas áreas con vigilancia preventiva y disuasoria. Unidades equipadas realizan rondas aleatorias, inspección perimetral y respuesta inmediata ante alertas de seguridad.",
+      "imageDesktop": "images/generated-image06.webp",
+      "imageMobile": "images/generated-image06-mf.webp",
+      "linkText": "Learn More",
+      "linkUrl": "#"
+    }
+  ],
+  "aboutUsTitle": "Ofrecemos soluciones de seguridad rentables",
+  "aboutUsItems": [
+    {
+      "id": "1",
+      "title": "Nuestra experiencia",
+      "imageUrl": "images/keyboard-security.webp",
+      "description": "Con más de 25 años de trayectoria ininterrumpida en el sector de la seguridad privada, hemos consolidado operaciones a nivel nacional protegiendo infraestructuras críticas y clientes de alto valor."
+    },
+    {
+      "id": "2",
+      "title": "Historia de Delfos",
+      "imageUrl": "images/security-cameras.webp",
+      "description": "Fundada en 2001 en Bogota, con la visión de transformar la vigilancia tradicional mediante la innovación tecnológica. Desde nuestros inicios hasta hoy, nuestra evolución constante nos mantiene como líderes del mercado."
+    },
+    {
+      "id": "3",
+      "title": "Mision",
+      "imageUrl": "images/security-dial.webp",
+      "description": "Nuestra misión es salvaguardar vidas, bienes y la tranquilidad absoluta de nuestros clientes, apoyados en personal altamente calificado y tecnología de vanguardia bajo estrictos protocolos de ética."
+    }
+  ],
+  "servicesTitle": "Qué ofrecemos",
+  "servicesSubtitle": "NUESTROS SERVICIOS",
+  "services": [
+    {
+      "id": "1",
+      "iconBg": "fa-solid fa-circle",
+      "icon": "fa-solid fa-house-lock",
+      "title": "SEGURIDAD RESIDENCIAL",
+      "description": "Vigilancia especializada para conjuntos residenciales y edificios. Protección 24/7 con personal capacitado, control de acceso y rondas preventivas que garantizan tranquilidad para su familia y propiedad."
+    },
+    {
+      "id": "2",
+      "iconBg": "fa-solid fa-circle",
+      "icon": "fa-solid fa-camera",
+      "title": "SISTEMAS CCTV",
+      "description": "Monitoreo en tiempo real con tecnología de videovigilancia avanzada. Cámaras de seguridad con grabación continua, visión nocturna y acceso remoto para supervisión constante de sus instalaciones."
+    },
+    {
+      "id": "3",
+      "iconBg": "fa-solid fa-circle",
+      "icon": "fa-solid fa-lock",
+      "title": "SEGURIDAD EN LA NUBE",
+      "description": "Almacenamiento seguro de videos e información de vigilancia en servidores protegidos. Acceso inmediato a grabaciones desde cualquier dispositivo con máxima confidencialidad y respaldo automático."
+    },
+    {
+      "id": "4",
+      "iconBg": "fa-solid fa-circle",
+      "icon": "fa-solid fa-computer",
+      "title": "SEGURIDAD EN SISTEMAS",
+      "description": "Protección integral de sistemas tecnológicos y datos empresariales. Control de acceso digital, monitoreo de equipos y prevención de amenazas cibernéticas para resguardar la información crítica de su organización."
+    },
+    {
+      "id": "5",
+      "iconBg": "fa-solid fa-circle",
+      "icon": "fa-solid fa-person-military-pointing",
+      "title": "SEGURIDAD FISICA",
+      "description": "Protección personal ejecutiva con personal altamente entrenado. Servicio especializado en seguridad física para directivos, empresarios y personas que requieren acompañamiento profesional en desplazamientos y eventos."
+    },
+    {
+      "id": "6",
+      "iconBg": "fa-solid fa-circle",
+      "icon": "fa-solid fa-fingerprint",
+      "title": "BIOMETRICOS",
+      "description": "Control de acceso inteligente mediante reconocimiento de huellas digitales y rasgos faciales. Tecnología avanzada que elimina tarjetas y códigos, garantizando identificación precisa e inviolable en sus instalaciones."
+    }
+  ],
+  "indicatorsTitle": "ESTAMOS DISPUESTOS A OFRECERTE SERVICIOS DE SEGURIDAD A UN PRECIO RAZONABLE Y A GARANTIZAR TU SEGURIDAD EN CUALQUIER SITUACIÓN DE TU VIDA",
+  "indicators": [
+    {
+      "id": "1",
+      "number": 280,
+      "label": "Proyectos"
+    },
+    {
+      "id": "2",
+      "number": 1200,
+      "label": "Personal Calificado"
+    },
+    {
+      "id": "3",
+      "number": 3100,
+      "label": "Fondos Asignados"
+    },
+    {
+      "id": "4",
+      "number": 270,
+      "label": "Clientes Satisfechos"
+    }
+  ],
+  "galleryTitle": "Descubre nuestra experiencia",
+  "gallerySubtitle": "GALERÍA DE FOTOS",
+  "galleryItems": [
+    {
+      "id": "1",
+      "imageUrl": "images/image-card-1-gallery.webp",
+      "alt": "Imagen card-gallery 1"
+    },
+    {
+      "id": "2",
+      "imageUrl": "images/image-card-2-gallery.webp",
+      "alt": "Imagen card-gallery 2"
+    },
+    {
+      "id": "3",
+      "imageUrl": "images/image-card-3-gallery.webp",
+      "alt": "Imagen card-gallery 3"
+    },
+    {
+      "id": "4",
+      "imageUrl": "images/image-card-4-gallery.webp",
+      "alt": "Imagen card-gallery 4"
+    },
+    {
+      "id": "5",
+      "imageUrl": "images/image-card-5-gallery.webp",
+      "alt": "Imagen card-gallery 5"
+    },
+    {
+      "id": "6",
+      "imageUrl": "images/image-card-6-gallery.webp",
+      "alt": "Imagen card-gallery 6"
+    }
+  ],
+  "testimonialsTitle": "Lo que dicen",
+  "testimonialsSubtitle": "Testimonios",
+  "testimonials": [
+    {
+      "id": "1",
+      "text": "\"Desde que contratamos a Seguridad Delfos Ltda, nuestra tranquilidad ha sido total. Su profesionalismo y protocolo de seguridad son impecables, protegiendo nuestras instalaciones tecnológicas las 24 horas. Sin duda, la mejor inversión para proteger nuestros activos.\"",
+      "authorName": "Sara Martinez",
+      "authorRole": "CEO | GlobalTech Solutions",
+      "authorImage": "images/client-image1.webp"
+    },
+    {
+      "id": "2",
+      "text": "\"Seguridad Delfos Ltda ha transformado completamente nuestra seguridad en Pacific Trade & Logistics. Su sistema de vigilancia es excepcional y se adaptan perfectamente a nuestros horarios irregulares. Recomiendo Seguridad Delfos sin reservas.\"",
+      "authorName": "Li Wei Chen",
+      "authorRole": "CEO | Pacific Trade & Logistics",
+      "authorImage": "images/client-image2.webp"
+    },
+    {
+      "id": "3",
+      "text": "\"En Luxe Boutique Hotels, la seguridad y discreción son fundamentales. Seguridad Delfos Ltda ha superado todas nuestras expectativas con sistemas invisibles pero efectivos. Gracias a Delfos, nuestros huéspedes VIP se sienten completamente seguros.\"",
+      "authorName": "Andrea Smith",
+      "authorRole": "CEO & Founder | Luxe Boutique Hotels",
+      "authorImage": "images/client-image3.webp"
+    }
+  ],
+  "newsTitle": "Información sobre seguridad",
+  "newsSubtitle": "NOTICIAS",
+  "newsItems": [
+    {
+      "id": "1",
+      "imageUrl": "images/image-news-card-1.webp",
+      "title": "Sistema de seguridad de edificios",
+      "linkUrl": "#",
+      "description": "Delfos ofrece seguridad de primer nivel para cualquier tipo de edificio gracias a su equipamiento de alta tecnología y al estricto cumplimiento de los protocolos. Como puedes ver, esta tarjeta no redirige a El Tiempo, sino que muestra nuestro texto personalizado.",
+      "iframeUrl": "https://www.eltiempo.com/tecnosfera/apps/como-proteger-sus-datos-personales-en-internet-3324089"
+    },
+    {
+      "id": "2",
+      "imageUrl": "images/image-news-card-2.webp",
+      "title": "No te preocupes, tus datos están a salvo",
+      "linkUrl": "#",
+      "iframeUrl": "https://www.eltiempo.com/tecnosfera/apps/como-proteger-sus-datos-personales-en-internet-3324089"
+    },
+    {
+      "id": "3",
+      "imageUrl": "images/image-news-card-3.webp",
+      "title": "Sigue adelante, siempre estaremos contigo",
+      "linkUrl": "#",
+      "iframeUrl": "https://www.eltiempo.com/colombia/otras-ciudades/inseguridad-en-colombia-estas-son-las-ciudades-mas-peligrosas-del-pais-segun-encuesta-del-dane-3315628"
+    }
+  ],
+  "preFooter": {
+    "text": "Descargue nuestro folleto corporativo",
+    "pdfUrl": "pdf/DELFOS_Dossier.pdf",
+    "pdfButtonText": "DESCARGAR.PDF"
+  },
+  "contactNumber": "(+57) 319 450 5775",
+  "utilsTitle": "Utils",
+  "utilsLinks": [
+    {
+      "id": "1",
+      "text": "Asha CRM",
+      "type": "external",
+      "target": "http://f-delfos-1010176351.s3-website.us-east-2.amazonaws.com/login"
+    },
+    {
+      "id": "2",
+      "text": "RondaKey",
+      "type": "external",
+      "target": "http://rondakey-url.com"
+    },
+    {
+      "text": "Supervigilancia",
+      "type": "external",
+      "target": "https://www.supervigilancia.gov.co/",
+      "id": "1773533292326"
+    }
+  ],
+  "headerLinks": [
+    {
+      "id": "1",
+      "text": "Inicio",
+      "type": "route",
+      "target": "/home"
+    },
+    {
+      "id": "2",
+      "text": "Nosotros",
+      "type": "internal",
+      "target": "#section-about"
+    },
+    {
+      "id": "3",
+      "text": "Servicios",
+      "type": "internal",
+      "target": "#section-services"
+    },
+    {
+      "id": "4",
+      "text": "Indicadores",
+      "type": "internal",
+      "target": "#section-indicators"
+    },
+    {
+      "id": "5",
+      "text": "Galeria",
+      "type": "internal",
+      "target": "#section-gallery"
+    },
+    {
+      "text": "Noticias",
+      "type": "internal",
+      "target": "#section-news",
+      "id": "1773534864117"
+    }
+  ],
+  "footerAbout": {
+    "title": "Delfos Ltda",
+    "description": "\"Seguridad Delfos Ltda: más de 20 años brindando soluciones integrales de seguridad con cobertura nacional. Comprometidos con nuestros clientes y el bienestar de nuestro talento humano.\""
+  },
+  "footerMainLinks": [
+    {
+      "id": "1",
+      "text": "Nosotros",
+      "type": "internal",
+      "target": "#section-about"
+    },
+    {
+      "id": "2",
+      "text": "Delivery Information",
+      "type": "route",
+      "target": "/delivery"
+    },
+    {
+      "id": "3",
+      "text": "Terms & Condition",
+      "type": "route",
+      "target": "/terms"
+    },
+    {
+      "id": "4",
+      "text": "Privacy Policy",
+      "type": "route",
+      "target": "/privacy"
+    },
+    {
+      "id": "5",
+      "text": "Contacto",
+      "type": "internal",
+      "target": "#section-contact"
+    },
+    {
+      "id": "6",
+      "text": "Return Policy",
+      "type": "route",
+      "target": "/returns"
+    }
+  ]
+}

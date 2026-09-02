@@ -1,0 +1,183 @@
+<header class="header">
+    <div class="header-diagonal">
+        <!-- Hamburger menu -->
+        <button class="hamburger-btn" (click)="toggleMobileMenu($event)" title="Menu">
+            @if (isMobileMenuOpen()) {
+            <!-- <i class="fa-solid fa-xmark"></i> -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <rect x="3" y="5" width="18" height="2" fill="white" />
+                <rect x="3" y="11" width="18" height="2" fill="white" />
+                <rect x="3" y="17" width="18" height="2" fill="white" />
+            </svg>
+            } @else {
+            <!-- <i class="fa-solid fa-bars"></i> -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <rect x="3" y="5" width="18" height="2" fill="white" />
+                <rect x="3" y="11" width="18" height="2" fill="white" />
+                <rect x="3" y="17" width="18" height="2" fill="white" />
+            </svg>
+            }
+        </button>
+    </div>
+
+
+
+
+    <div class="container header-main">
+
+        <div class="big-logo">
+            <img src="images/big-logo.webp" alt="Delfos Ltda Logo">
+        </div>
+        <div class="header-container">
+            <div class="header-header">
+                <div class="contact-info hide-on-mobile">
+                    <span>Call Us: {{ contactNumber() }}</span>
+                </div>
+                <div class="social-links hide-on-mobile">
+                    <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+                <!-- Control of Login & LogOut -->
+                <div class="user-actions">
+                    <!-- Utils Dropdown -->
+                    <div class="utils-dropdown">
+                        <!-- <button class="social-icon header-crm-btn" (click)="toggleUtilsMenu($event)"
+                            style="background-color: #F26723; color: white; border-radius: 5px; border: none; cursor: pointer;">
+                            <i class="fa-solid fa-layer-group"></i> <span class="btn-text">{{ utilsTitle() }}</span>
+                            <i class="fa-solid fa-chevron-down" style="font-size: 1.2rem; margin-left: 0.5rem;"></i>
+                        </button> -->
+                        <button class="social-icon header-crm-btn" (click)="toggleUtilsMenu($event)"
+                            style="background-color: #F26723; color: white; border-radius: 5px; border: none; cursor: pointer;">
+                            <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g id="Outlined" transform="translate(-104.000000, -3436.000000)">
+                                        <g id="Navigation" transform="translate(100.000000, 3378.000000)">
+                                            <g id="Outlined-/-Navigation-/-apps"
+                                                transform="translate(0.000000, 54.000000)">
+                                                <g>
+                                                    <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon>
+                                                    <path
+                                                        d="M4,8 L8,8 L8,4 L4,4 L4,8 Z M10,20 L14,20 L14,16 L10,16 L10,20 Z M4,20 L8,20 L8,16 L4,16 L4,20 Z M4,14 L8,14 L8,10 L4,10 L4,14 Z M10,14 L14,14 L14,10 L10,10 L10,14 Z M16,4 L16,8 L20,8 L20,4 L16,4 Z M10,8 L14,8 L14,4 L10,4 L10,8 Z M16,14 L20,14 L20,10 L16,10 L16,14 Z M16,20 L20,20 L20,16 L16,16 L16,20 Z"
+                                                        id="Icon-Color" fill="#FFFFFF"></path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                        </button>
+                        @if (isUtilsMenuOpen()) {
+                        <div class="utils-menu-list">
+                            <ul>
+                                @for (link of utilsLinks(); track link.id) {
+                                <li>
+                                    <a href="#" (click)="handleLinkClick($event, link); isUtilsMenuOpen.set(false)"
+                                        class="dropdown-item">
+                                        {{ link.text }}
+                                    </a>
+                                </li>
+                                }
+
+                                <li class="divider"></li>
+
+                                @if (isLoggedIn()) {
+                                @if (router.url.includes('/admin')) {
+                                <a routerLink="/" class="social-icon header-login-btn"
+                                    style="background-color: #28a745; color: white; border-radius: 5px; text-decoration: none;">
+                                    <i class="fa-solid fa-house"></i> <span class="btn-text">Home</span>
+                                </a>
+                                } @else {
+                                <a href="/admin" class="social-icon header-login-btn"
+                                    style="background-color: #28a745; color: white; border-radius: 5px; text-decoration: none;">
+                                    <i class="fa-solid fa-gauge"></i> <span class="btn-text">Admin</span>
+                                </a>
+                                }
+                                <a href="#" (click)="logout($event)" class="social-icon header-login-btn logout-btn"
+                                    style="cursor: pointer"><i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                    <span class="btn-text" style="color: black;">LogOut</span></a>
+                                } @else {
+                                <a routerLink="/login" class="social-icon header-login-btn"><i
+                                        class="fa-solid fa-arrow-right-to-bracket"></i>
+                                    <span class="btn-text" style="color: black;">Login</span></a>
+                                }
+
+                            </ul>
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="header-menu" [class.mobile-open]="isMobileMenuOpen()">
+                <ul>
+                    @for (link of headerLinks(); track link.id) {
+                    <li><a href="#" (click)="handleLinkClick($event, link); isMobileMenuOpen.set(false)">{{ link.text
+                            }}</a></li>
+                    }
+                    <!-- Search Icon updated path -->
+                    <li>
+                        <a href="#" (click)="toggleSearch($event); isMobileMenuOpen.set(false)" title="Buscar">
+                            <img src="images/search-icon.webp" alt="Search" style="width: 20px; height: 20px;">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="big-logo-mobile">
+                <img src="images/big-logo.webp" alt="Delfos Ltda Logo">
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Modal Overlay -->
+    @if (isSearchOpen()) {
+    <div class="search-modal-overlay" (click)="toggleSearch($event)">
+        <div class="search-modal-content" (click)="$event.stopPropagation()">
+            <div class="search-header">
+                <i class="fa-solid fa-magnifying-glass search-icon-input"></i>
+                <input type="text" placeholder="Buscar servicios, noticias o secciones..." [ngModel]="searchQuery()"
+                    (ngModelChange)="searchQuery.set($event)" autofocus>
+                <button class="close-search-btn" (click)="toggleSearch($event)">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="search-results">
+                @if (searchQuery().length > 0) {
+                @if (searchResults().length > 0) {
+                <ul class="results-list">
+                    @for (result of searchResults(); track result.hash + result.title) {
+                    <li>
+                        <a href="#" (click)="handleSearchResultClick($event, result.hash)">
+                            <div class="result-info">
+                                <span class="result-title">{{ result.title }}</span>
+                                <span class="result-type">{{ result.type }}</span>
+                            </div>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </li>
+                    }
+                </ul>
+                } @else {
+                <div class="no-results">
+                    <i class="fa-regular fa-face-frown-open"></i>
+                    <p>No se encontraron resultados para "{{ searchQuery() }}"</p>
+                </div>
+                }
+                } @else {
+                <div class="search-suggestions">
+                    <p>Sugerencias de búsqueda:</p>
+                    <div class="suggestion-tags">
+                        <span class="tag" (click)="searchQuery.set('cámara')">Cámaras</span>
+                        <span class="tag" (click)="searchQuery.set('escolta')">Escoltas</span>
+                        <span class="tag" (click)="searchQuery.set('tecnología')">Tecnología</span>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+    }
+</header>

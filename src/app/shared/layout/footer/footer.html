@@ -1,0 +1,49 @@
+<footer class="footer footer__background">
+    <div class="container">
+        <div class="sections-footer">
+            <section class="col footer-card-1">
+                <h2>{{ footerAbout().title }}</h2>
+                <p>{{ footerAbout().description }}</p>
+            </section>
+
+            <section class="col footer-card-2">
+                <h2>Latest Post</h2>
+                <ul>
+                    <li class="links-card-2"><a href="#section-carousel" class="post-link">
+                            <i class="fa-solid fa-user-shield"></i>Revealed: How to set goals for you and your team</a>
+                    </li>
+
+                    <li class="links-card-2"><a href="#section-two-carousel" class="post-link">
+                            <i class="fa-solid fa-lock"></i>Five ways to improve as a business professional!</a>
+                    </li>
+                </ul>
+            </section>
+
+            <nav class="col footer-card-3">
+                <h2>Main Links</h2>
+                <ul>
+                    @for (link of footerMainLinks(); track link.id) {
+                    <li><a href="#" (click)="handleLinkClick($event, link)">{{ link.text }}</a></li>
+                    }
+                </ul>
+            </nav>
+            <section class="col footer-card-4">
+                <h2>Newsletter</h2>
+                <p>Don't miss to subscribe to our news feeds, kindly fill the form below</p>
+                <form action="">
+                    <input type="text" name="subscribe" value="">
+                    <!-- TODO: Por favor colocar el boton del formulario -->
+                </form>
+            </section>
+        </div>
+    </div>
+</footer>
+
+<section class="post-footer">
+    <div class="container">
+        <div class="post-footer-bar">
+            <!-- Dynamic copyright generation -->
+            <p>&copy; Copyright <a href="#section-carousel">{{ footerAbout().title }}</a> {{ currentYear }}. All rights reserved</p>
+        </div>
+    </div>
+</section>

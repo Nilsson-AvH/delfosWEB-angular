@@ -1,0 +1,29 @@
+<section id="section-gallery" class="section section-gallery gallery">
+    <div class="container">
+        <h2>{{ title() }}</h2>
+        <h2>{{ subtitle() }}</h2>
+        <div class="carousel-gallery">
+            @for (item of items(); track item.id; let i = $index) {
+            <a href="#" (click)="openLightbox(i, $event)" class="card card-gallery hover-effect-global">
+                <img [src]="item.imageUrl" [alt]="item.alt" loading="lazy">
+            </a>
+            }
+        </div>
+
+        @if (activeImageIndex() !== null) {
+        <figure class="lightbox-modal">
+            <img [src]="items()[activeImageIndex()!].imageUrl" [alt]="items()[activeImageIndex()!].alt" loading="lazy">
+
+            <button class="nav prev scroll-top-btn" (click)="prevImage($event)" aria-label="Anterior">
+                &#10094;
+            </button>
+            <button class="nav next scroll-top-btn" (click)="nextImage($event)" aria-label="Siguiente">
+                &#10095;
+            </button>
+
+            <a class="close" href="#" (click)="closeLightbox($event)" aria-label="Cerrar"></a>
+        </figure>
+        }
+
+    </div>
+</section>

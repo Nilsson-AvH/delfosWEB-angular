@@ -1,0 +1,204 @@
+/*main-carousel-galery*/
+
+.section-gallery .container>h2:first-of-type {
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    margin: 9rem 0 0 0;
+
+}
+
+
+.section-gallery .container>h2:nth-of-type(2) {
+    font-family: "Oswald", sans-serif;
+    font-size: 30px;
+    color: #F26723;
+    text-align: center;
+    margin: 10px 0px 0px;
+    font-weight: 500;
+}
+
+.card-gallery img {
+    width: 100%;
+    /* ocupa todo el ancho del contenedor */
+    height: auto;
+    /* mantiene la proporción original */
+    display: block;
+    /* elimina espacio blanco debajo de la imagen */
+    border-radius: 0.5rem;
+    /* opcional, esquinas redondeadas */
+}
+
+.carousel-gallery {
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+    margin: 3rem auto;
+    width: 100%;
+    justify-content: center;
+    width: 85%;
+    padding-bottom: 4rem;
+}
+
+.card {
+    flex: 1 1 46rem;
+    height: 21rem;
+    background-color: salmon;
+    border-radius: 0.5rem;
+    /*puntas redondeadas de la card*/
+    text-align: center;
+    align-content: center;
+
+}
+
+.carousel-gallery .card {
+    display: none;
+}
+
+.carousel-gallery .card:first-child {
+    display: flex;
+}
+
+
+.carousel-gallery .card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .16);
+}
+
+.lightbox-modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    z-index: 1050;
+    /* Superior a Header */
+    animation: fadeInModal 0.3s ease;
+}
+
+@keyframes fadeInModal {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Fondo oscuro detrás de la imagen */
+.lightbox-modal::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(4px);
+}
+
+.lightbox-modal img {
+    position: relative;
+    max-width: min(90vw, 1200px);
+    max-height: 80vh;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+    z-index: 1051;
+    animation: scaleInImage 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+@keyframes scaleInImage {
+    from {
+        transform: scale(0.90);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+/* Navegación izquierda/derecha. Heredan diseño de .scroll-top-btn pero ajustan su layout aquí */
+.lightbox-modal .nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1052;
+}
+
+.lightbox-modal .nav:hover {
+    transform: translateY(calc(-50% - 3px));
+}
+
+.lightbox-modal .prev {
+    left: 10px;
+}
+
+.lightbox-modal .next {
+    right: 10px;
+}
+
+@media (min-width: 768px) {
+    .lightbox-modal .prev {
+        left: 40px;
+    }
+
+    .lightbox-modal .next {
+        right: 40px;
+    }
+}
+
+/* Botón cerrar (X) */
+.lightbox-modal .close {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: var(--Raisin-Black, #2a2a2a);
+    border: 2px solid var(--Halloween-Orange, #F26723);
+    color: var(--Halloween-Orange, #F26723);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    cursor: pointer;
+    z-index: 1052;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+.lightbox-modal .close:hover {
+    background: var(--Halloween-Orange, #F26723);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 2px 8px 15px rgba(242, 103, 35, 0.5);
+}
+
+.lightbox-modal .close::after {
+    content: "✕";
+    font-size: 20px;
+    line-height: 1;
+    font-weight: bold;
+    color: inherit;
+}
+
+@media (width > 567px) {
+
+    /*main-galley*/
+    .card {
+        flex: 0 0 42rem;
+        height: 28rem;
+    }
+}
+
+@media (width > 768px) {
+    .card {
+        flex: 0 0 26rem;
+        height: 18rem;
+    }
+
+    .carousel-gallery .card {
+        display: flex;
+    }
+}

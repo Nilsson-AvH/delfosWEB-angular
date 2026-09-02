@@ -1,0 +1,223 @@
+/* .container-carousel {
+    padding: 0;
+} */
+ 
+/* 
+@keyframes spin {
+    from {
+        translate: 0;
+    }
+
+    to {
+        translate: -100%;
+    }
+}
+
+.group {
+    display: flex;
+    gap: 1em;
+    animation: spin 10s infinite linear;
+} */
+
+.carousel {
+    anchor-name: --carousel;
+    box-sizing: border-box;
+    display: flex;
+    gap: 1em;
+    /* margin: 3em auto; */
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-marker-group: after; /* Esta propiedad permite establecer un grupo de marcadores que se dibujarn en el contenido cuando se desplaza el scroll. En este caso, se dibujarn marcadores justo antes de cada elemento del contenedor. */
+    scroll-snap-type: x mandatory;
+
+    &::scroll-marker-group{
+        display: flex;
+        justify-content: center;
+        gap: .5em;
+    }
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    &::scroll-button(right){
+        content: "⭢";
+        position-area: right center;
+        translate: -100%;
+    }
+
+    &::scroll-button(left){
+        content: "⭠";
+        position-area: left center;
+        translate: 100%;
+    }
+
+    &::scroll-button(right),
+    &::scroll-button(left) {
+        cursor: pointer;
+        background-color: #F26723;
+        font-size: 1.4em;
+        color: white;
+        border-radius: 50%;
+        width: 2rem;
+        height: 2rem;
+        padding: .8em;
+
+        /* === CENTRADO PERFECTO === */
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+
+        position: fixed;
+        position-anchor: --carousel;
+    }
+
+    &::scroll-button(right):disabled,
+    &::scroll-button(left):disabled {
+        opacity: .5;
+        cursor: auto;
+    }
+    /*.carousel .group*/
+
+
+
+    /*.carousel .card*/
+    .card {
+        position: relative;
+        align-content: center;
+        /* background-color: blueviolet; */
+        border-radius: .5rem;
+        border: 1px dotted black;
+        box-sizing: border-box;
+        flex: 0 0 100%;
+        /* aspect-ratio: 275/112; */
+        /* padding: 1em; */
+        scroll-snap-align: start;
+        text-align: center;
+        height: 100%;
+
+        &::scroll-marker{
+        content: "";
+        width: 1em;
+        height: 1em;
+        background-color: #F26723;
+        border-radius: 50%;
+        cursor: pointer;
+        transform: translateY(-3rem);
+        }
+
+        &::scroll-marker:target-current{
+            background-color: black;
+        }
+        
+        .slide-picture {
+            position: relative;
+
+            .img-carousel {
+                width: 100%;
+                height: 45rem;
+                object-fit: cover;
+            }
+        }
+
+        .slide-content {
+            max-width: 100vw;
+            padding: 3rem;
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 2rem;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: slideInLeft 1s ease-out;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 68%;
+                
+            .slide-title {
+                font-family: 'Oswald', sans-serif;
+                font-size: 2rem;
+                font-weight: 700;
+                margin: 0;
+                line-height: 1.1;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+                color: white;
+            }
+
+            .slide-text {
+                font-size: 1.8rem;
+                /* margin-bottom: 2.5rem; */
+                /* line-height: 1.6; */
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+                font-weight: 400;
+                color: white;
+            }
+
+            .slide-btn {
+                background: linear-gradient(45deg, #FF4500, #FF6B35);
+                color: white;
+                border: none;
+                padding: 18px 40px;
+                font-size: 1.1rem;
+                font-family: 'Oswald', sans-serif;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: all 0.4s ease;
+                box-shadow: 0 6px 20px rgba(255,69,0,0.3);
+                position: relative;
+                overflow: hidden;
+            }
+
+            .slide-btn:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 8px 25px rgba(255,69,0,0.5);
+            }
+
+            .slide-btn::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+                transition: left 0.5s;
+            }
+
+            .slide-btn:hover::before {
+                left: 100%;
+            }
+        }
+    }
+    
+    /*Media Queries +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+    @media (min-width: 567px) {
+        .card {
+            /* flex: 0 0 50%; */
+            
+            &::scroll-marker{
+            transform: translateY(-3rem);
+            }
+        }
+
+        .slide-content {
+            /* height:fit-content; */
+        }
+    }
+    @media (min-width: 768px) {
+        .card {
+            /* flex: 0 0 33.3333%; */
+        }
+    }
+    @media (min-width: 1024px) {
+        .card {
+            /* flex: 0 0 25%; */
+        }
+    }
+}
+

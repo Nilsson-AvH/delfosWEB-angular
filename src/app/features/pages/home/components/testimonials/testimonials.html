@@ -1,0 +1,25 @@
+<section id="section-testimonials" class="section section-testimonials testimonials">
+    <div class="container custom-container">
+        <div class="testimonials-header">
+            <h2>{{ title() }}</h2>
+            <h3>{{ subtitle() }}</h3>
+        </div>
+
+        <div class="testimonials-grid">
+            @for (item of items(); track item.id; let i = $index) {
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    <p class="quote">"{{ item.text }}"</p>
+                </div>
+                <div class="testimonial-author">
+                    <img [src]="item.authorImage" [alt]="item.authorName" class="author-img" loading="lazy">
+                    <div class="author-info">
+                        <h4>{{ item.authorName }}</h4>
+                        <span>{{ item.authorRole }}</span>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</section>

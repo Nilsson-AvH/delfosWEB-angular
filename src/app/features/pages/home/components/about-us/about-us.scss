@@ -1,0 +1,192 @@
+/* ===========================================
+   ABOUT US SECTION - MOBILE FIRST
+   =========================================== */
+
+/* Contenedor principal de la sección */
+.section-about-us {
+    padding: 2rem 0;
+    background-color: #f8f9fa;
+    position: relative;
+}
+
+/* Container responsivo */
+/* .about-us .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+} */
+
+/* Header de la sección */
+.about-us__header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.about-us__title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: #2c3e50;
+    line-height: 1.4;
+    margin: 0;
+    max-width: 600px;
+    margin: 0 auto;
+    text-transform: uppercase;
+    margin-top: 7rem;
+}
+
+/* ===========================================
+   GRID DE TARJETAS - MOBILE FIRST
+   =========================================== */
+
+/* Grid principal - móvil: 1 columna */
+.about-us__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+/* Tarjetas individuales */
+.about-us__card {
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    cursor: pointer;
+}
+
+/* Efecto hover en tarjetas */
+.about-us__card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px #F26723;
+}
+
+/* Contenedor de imagen */
+.about-us__card-image {
+    position: relative;
+    overflow: hidden;
+    height: 200px;
+}
+
+.about-us__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+/* Contenido de la tarjeta */
+.about-us__card-content {
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.about-us__card-title {
+    font-family: "Oswald", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0;
+    line-height: 1.3;
+}
+
+/* ===========================================
+   BREAKPOINTS RESPONSIVOS
+   =========================================== */
+
+/* Tablet - 768px y más */
+@media (min-width: 768px) {
+    .section-about-us {
+        padding: 3rem 0;
+    }
+    
+    .about-us .container {
+        padding: 0 2rem;
+    }
+    
+    .about-us__title {
+        /* font-size: 1.8rem; */
+        max-width: 700px;
+    }
+    
+    .about-us__header {
+        margin-bottom: 3rem;
+    }
+    
+    /* Grid: 2 columnas en tablet */
+    .about-us__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+    
+    /* La tercera tarjeta ocupa las 2 columnas */
+    .about-us__card:nth-child(3) {
+        grid-column: 1 / -1;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    
+    .about-us__card-image {
+        height: 220px;
+    }    
+    
+}
+
+/* Desktop - 992px y más */
+@media (min-width: 992px) {
+    .section-about-us {
+        padding: 4rem 0;
+    }
+    
+    .about-us__title {
+        font-size: 2rem;
+        max-width: 800px;
+    }
+    
+    .about-us__header {
+        margin-bottom: 4rem;
+    }
+    
+    /* Grid: 3 columnas en desktop */
+    .about-us__grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.5rem;
+    }
+    
+    /* Reset de la tercera tarjeta */
+    .about-us__card:nth-child(3) {
+        grid-column: auto;
+        max-width: none;
+    }
+    
+    .about-us__card-image {
+        height: 240px;
+    }
+    
+    .about-us__card-content {
+        padding: 2rem 1.5rem;
+    }
+        
+}
+
+/* Desktop Large - 1200px y más */
+@media (min-width: 1200px) {
+    .about-us .container {
+        padding: 0;
+    }
+    
+    .about-us__title {
+        font-size: 2.2rem;
+    }
+    
+    .about-us__grid {
+        gap: 3rem;
+    }
+    
+    .about-us__card-image {
+        height: 260px;
+    }
+}

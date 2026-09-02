@@ -1,0 +1,43 @@
+<section id="section-news" class="section section-news-various news-various">
+    <div class="container">
+        <h2>{{ title() }}</h2>
+        <h3>{{ subtitle() }}</h3>
+        <div class="news-various-cards">
+            @for (item of items(); track item.id; let i = $index) {
+            <div class="news news-card-{{ i + 1 }} hover-effect-global" (click)="openModal(i, $event)"
+                style="cursor: pointer;">
+                <img [src]="item.imageUrl" [alt]="item.title" loading="lazy">
+                <a [href]="item.linkUrl" (click)="$event.preventDefault()">{{ item.title }}</a>
+            </div>
+            }
+        </div>
+
+        <!-- Renderizado del Lightbox Modal Condicional Iframe -->
+        @if (activeNewsIndex() !== null) {
+        <figure class="lightbox-modal">
+            <div class="modal-card">
+                <div class="modal-card-body"
+                    style="padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1;">
+                    <h3 style="margin-bottom: 1rem; font-size: 2rem;">{{ items()[activeNewsIndex()!].title }}</h3>
+
+                    @if (items()[activeNewsIndex()!].iframeUrl) {
+                    <iframe class="modal-iframe-container" [src]="items()[activeNewsIndex()!].iframeUrl | safeUrl"
+                        title="News Component Origin" allowfullscreen></iframe>
+                    } @else if (items()[activeNewsIndex()!].description) {
+                    <div style="padding: 1rem 0; overflow-y: auto; max-height: 60vh;">
+                        <img [src]="items()[activeNewsIndex()!].imageUrl" [alt]="items()[activeNewsIndex()!].title" style="max-width: 100%; border-radius: 8px; margin-bottom: 2rem;">
+                        <p style="white-space: pre-wrap; font-size: 1.6rem; color: #fff;">{{ items()[activeNewsIndex()!].description }}</p>
+                    </div>
+                    } @else {
+                    <p style="text-align: center; padding: 3rem;">No se proporcionó una URL o descripción válida para esta noticia.
+                    </p>
+                    }
+                </div>
+            </div>
+
+            <a class="close" href="#" (click)="closeModal($event)" aria-label="Cerrar"></a>
+        </figure>
+        }
+
+    </div>
+</section>

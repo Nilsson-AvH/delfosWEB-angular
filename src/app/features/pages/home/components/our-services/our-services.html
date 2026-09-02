@@ -1,0 +1,16 @@
+<section id="section-services" class="section section-our-services our-services">
+    <div class="container">
+        <h2>{{ title() }}</h2>
+        <h2>{{ subtitle() }}</h2>
+        <div class="cards-service">
+            @for (service of services(); track service.id) {
+            <div class="card-service-1 hover-effect-global">
+                <i [class]="service.iconBg"></i>
+                <i [class]="service.icon"></i>
+                <h3>{{ service.title }}</h3>
+                <p>{{ service.description }}</p>
+            </div>
+            }
+        </div>
+    </div>
+</section>

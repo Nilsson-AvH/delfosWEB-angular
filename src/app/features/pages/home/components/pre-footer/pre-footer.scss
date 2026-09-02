@@ -1,0 +1,60 @@
+/*pre-footer*/
+.banner {
+    width: 100%;
+    /* height: 11rem;    */
+    background: var(--Halloween-Orange);
+    align-items: center;
+    justify-content: space-between;
+}
+
+.banner-content {
+    display: flex;
+    align-items: center;
+    height: 12rem;
+    flex-direction: column;
+}
+
+.banner-content p {
+    font-family: "Roboto", sans-serif;
+    color: white;
+    font-size: 20px;
+}
+
+@media (min-width: 567px) {
+    .banner-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 8.5rem;
+        flex-direction: row;
+    }
+}
+
+@media (min-width: 768px) {
+    .banner {
+        width: 100%;
+        height: 8.5rem;
+        background: linear-gradient(
+                /* Fondo dividido en diagonal */
+                55deg,
+                var(--Halloween-Orange) 0%,
+                var(--Halloween-Orange) 50%,
+                #f4f4f4 50%,
+                #f4f4f4 100%);
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+    }
+
+    .banner-content {
+        height: 8.5rem;
+    }
+
+    .banner-content::before {
+        content: "";
+        position: absolute;
+        border-bottom: 2px solid #F4F4F4;
+        right: 0;
+        bottom: 0;
+    }
+}

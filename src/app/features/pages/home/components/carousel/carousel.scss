@@ -1,0 +1,213 @@
+/* .container-carousel {
+    padding: 0;
+} */
+
+.carousel-wrapper {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.carousel {
+    box-sizing: border-box;
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    /* Firefox */
+
+    &::-webkit-scrollbar {
+        display: none;
+        /* Chrome, Safari, etc */
+    }
+
+    /*.carousel .card*/
+    .card {
+        position: relative;
+        align-content: center;
+        /* background-color: blueviolet; */
+        border-radius: .5rem;
+        /* border: 1px dotted black; */
+        box-sizing: border-box;
+        flex: 0 0 100%;
+        /* aspect-ratio: 275/112; */
+        /* padding: 1em; */
+        scroll-snap-align: start;
+        text-align: center;
+        height: 100%;
+
+        .slide-picture {
+            position: relative;
+
+            .img-carousel {
+                width: 100%;
+                height: 45rem;
+                object-fit: cover;
+                display: block;
+                /* Fix para pequeños bugs visuales de linea inferior en imagenes */
+            }
+        }
+
+        .slide-content {
+            max-width: 100vw;
+            padding: 3rem;
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 2rem;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: slideInLeft 1s ease-out;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 68%;
+
+            .slide-title {
+                font-family: 'Oswald', sans-serif;
+                font-size: 2rem;
+                font-weight: 700;
+                margin: 0;
+                line-height: 1.1;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+                color: white;
+            }
+
+            .slide-text {
+                font-size: 1.8rem;
+                /* margin-bottom: 2.5rem; */
+                /* line-height: 1.6; */
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+                font-weight: 400;
+                color: white;
+            }
+
+            .slide-btn {
+                background: linear-gradient(45deg, #FF4500, #FF6B35);
+                color: white;
+                border: none;
+                padding: 18px 40px;
+                font-size: 1.1rem;
+                font-family: 'Oswald', sans-serif;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: all 0.4s ease;
+                box-shadow: 0 6px 20px rgba(255, 69, 0, 0.3);
+                position: relative;
+                overflow: hidden;
+            }
+
+            .slide-btn:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 8px 25px rgba(255, 69, 0, 0.5);
+            }
+
+            .slide-btn::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+                transition: left 0.5s;
+            }
+
+            .slide-btn:hover::before {
+                left: 100%;
+            }
+        }
+    }
+}
+
+/* Nuevos Controles Personalizados (Estilo Volver Arriba / Hover Premium) */
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--Raisin-Black, #2a2a2a);
+    color: var(--Halloween-Orange, #F26723);
+    border: 2px solid var(--Halloween-Orange, #F26723);
+    font-size: 1.5rem;
+    border-radius: 50%;
+    width: 3.5rem;
+    height: 3.5rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.4);
+
+    &:hover {
+        background-color: var(--Halloween-Orange, #F26723);
+        color: white;
+        transform: translateY(-50%) scale(1.1);
+        box-shadow: 2px 8px 15px rgba(242, 103, 35, 0.5);
+    }
+
+    &.prev {
+        left: 1rem;
+    }
+
+    &.next {
+        right: 1rem;
+    }
+}
+
+.carousel-indicators {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.8rem;
+    z-index: 10;
+
+    .dot {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.5);
+        border: 2px solid transparent;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        padding: 0;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        &.active {
+            background-color: #F26723;
+            border-color: white;
+            transform: scale(1.2);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+        }
+    }
+}
+
+/*Media Queries +++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+@media (min-width: 567px) {
+    .card {
+        /* flex: 0 0 50%; */
+    }
+}
+
+@media (min-width: 768px) {
+    .card {
+        /* flex: 0 0 33.3333%; */
+    }
+}
+
+@media (min-width: 1024px) {
+    .card {
+        /* flex: 0 0 25%; */
+    }
+}

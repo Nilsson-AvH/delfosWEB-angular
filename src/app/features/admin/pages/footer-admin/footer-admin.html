@@ -1,0 +1,88 @@
+<div class="admin-panel animate__animated animate__fadeIn">
+    <h2>Footer Configuration</h2>
+
+    <!-- About Section -->
+    <div class="admin-section">
+        <h3>Company Information (Footer Card 1)</h3>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Company Name (Title)</label>
+                <input type="text" [(ngModel)]="footerAboutForm.title" class="form-control">
+            </div>
+            <div class="form-group" style="flex: 2;">
+                <label>Description Text</label>
+                <textarea [(ngModel)]="footerAboutForm.description" class="form-control" rows="3"></textarea>
+            </div>
+        </div>
+        <button class="btn-primary" style="margin-top: 1.5rem;" (click)="saveFooterAbout()"><i
+                class="fa-solid fa-save"></i> Save Information</button>
+    </div>
+
+    <!-- Main Links Section -->
+    <div class="admin-section">
+        <h3>Main Links Configuration (Footer Card 3)</h3>
+
+        <!-- List of Links -->
+        <div class="items-list">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Text</th>
+                        <th>Type</th>
+                        <th>Target</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let link of links">
+                        <td>{{link.text}}</td>
+                        <td><span class="badge" [ngClass]="link.type">{{link.type}}</span></td>
+                        <td>{{link.target}}</td>
+                        <td class="actions">
+                            <button class="btn-outline" style="padding: 0.5rem 1rem;" (click)="editLink(link)"><i
+                                    class="fa-solid fa-pencil"></i></button>
+                            <button class="btn-danger" style="padding: 0.5rem 1rem;" (click)="deleteLink(link.id!)"><i
+                                    class="fa-solid fa-trash"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Add/Edit Link Form -->
+        <div class="form-card edit-form">
+            <h4>{{ editingLinkId ? 'Edit Link' : 'Add New Link' }}</h4>
+            <div class="form-group">
+                <label>Link Text</label>
+                <input type="text" [(ngModel)]="newLink.text" class="form-control"
+                    placeholder="e.g. Terms & Conditions">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Link Type</label>
+                    <select [(ngModel)]="newLink.type" class="form-control">
+                        <option value="internal">Internal Anchor (Scroll to #section)</option>
+                        <option value="route">Angular Route (/path)</option>
+                        <option value="external">External URL (http://...)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Target</label>
+                    <input type="text" [(ngModel)]="newLink.target" class="form-control"
+                        [placeholder]="newLink.type === 'internal' ? '#section-id' : (newLink.type === 'route' ? '/path' : 'https://...')">
+                    <small *ngIf="newLink.type === 'internal'" class="help-text">Use HTML Element IDs (e.g.
+                        #section-about)</small>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn-primary" (click)="saveLink()"><i class="fa-solid fa-save"></i> {{ editingLinkId ?
+                    'Update Link' : 'Add Link' }}</button>
+                <button *ngIf="editingLinkId" class="btn-outline" (click)="cancelEdit()"><i
+                        class="fa-solid fa-times"></i> Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

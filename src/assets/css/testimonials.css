@@ -1,0 +1,285 @@
+@import url(./normalize.css);
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+/*Titulos de color negro*/
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+/*titulos naranjas*/
+
+
+/* Variables globales */
+
+
+:root {
+    /* Convierte 1rem en base 10 */
+    --over-font-size: 62.5%;
+
+
+    /* Colores base */
+    --Orange-Yellow: #F4B527;
+    --Halloween-Orange: #F26723;
+    --Maximun-Red: #D12420;
+    --Navy-Blue: #09097C;
+    --Raisin-Black: #212121;
+    /*Background copyrigth y testimonials*/
+    --Lotion: #fcfcfd;
+    /*Body*/
+    --Anti-Flash-White: #F3F3F3;
+    /*Background our service*/
+    --Raisin-Black: #222222;
+    /*Background footer principal*/
+    --Charleston-Green: #2b2b2b;
+    /*Background testimonials y subscribe*/
+    --Dim-Gray: #636C72;
+    /*Color letra footer*/
+}
+
+
+@keyframes spin {
+    from {
+        translate: 0;
+    }
+    to {
+        translate:-100%;
+    }
+}
+
+
+.testimonials {
+    background-color: #212121;
+    padding: 0 1rem; /* Padding para móviles */
+
+
+    h2 {
+        color: var(--Lotion);
+        font-family: "Roboto", sans-serif;
+        font-size: 16px; /* Reducido para móvil */
+        font-weight: 500;
+        margin-bottom: 4px;
+        margin-top: 4rem; /* Reducido para móvil */
+    }
+
+
+    h3 {
+        font-family: "Oswald", sans-serif;
+        font-size: 24px; /* Reducido para móvil */
+        color: var(--Halloween-Orange);
+        margin: 0px;
+        font-weight: 500;
+    }
+
+
+    h4 {
+        font-family: "Oswald", sans-serif;
+        font-size: 13px; /* Reducido para móvil */
+        color: var(--Lotion);
+        margin: 0px;
+        font-weight: 500;
+    }
+
+
+    p {
+        color: var(--Lotion);
+        font-family: "Roboto", sans-serif;
+        font-size: 12px; /* Reducido para móvil */
+        font-weight: 500;
+    }
+
+
+    .testimonials-container--header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+
+    .testimonials-carousel {
+        margin: 2rem auto; /* Reducido para móvil */
+        width: 100%; /* Cambiado a 100% para móvil */
+        max-width: 90vw; /* Máximo 90% del viewport */
+        height: auto; /* Auto para adaptarse al contenido */
+        min-height: 28rem; /* Altura mínima */
+        display: flex;
+        overflow-x: auto;
+        align-items: start;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+
+    .testimonials-carousel::-webkit-scrollbar {
+        display: none;
+    }
+
+
+    .testimonials-group {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        animation: spin 35s infinite linear;
+        padding-right: 1rem;
+    }
+
+
+    .testimonials-card {
+        /* 
+            flex: 0 0 85rem; es igual a tener esto:
+            flex-grow: 0;
+            flex-shrink: 0;
+            flex-basis: 5rem; 
+        */
+        flex: 0 0 60vw; /* Cambiado a viewport width para móvil */
+        height: auto; /* Auto para móvil */
+        min-height: 25rem;
+        padding: 1.5rem; /* Ajustado */
+        border-radius: .2rem;
+        text-align: center;
+        align-content: center;
+
+
+        & img {
+            width: 6rem; /* Reducido para móvil */
+        }
+
+
+        .divisory-line {
+            height: 1px;
+            width: 100%;
+            background-color: var(--Dim-Gray);
+            margin: 1.5rem 0; /* Reducido para móvil */
+        }
+
+
+        .card-content {
+            display: flex;
+            flex-direction: column; /* Cambiado a columna para móvil */
+            justify-content: center;
+            align-items: center; /* Centrado en móvil */
+            gap: 1rem;
+
+
+            .card-content--text {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                text-align: center; /* Centrado en móvil */
+            }
+        }
+    }
+}
+
+/* ========================================
+   MEDIA QUERIES - MOBILE FIRST
+   ======================================== */
+
+/* Tablets (768px en adelante) */
+@media (min-width: 768px) {
+    .testimonials {
+        padding: 0 2rem;
+
+        h2 {
+            font-size: 20px;
+            margin-top: 6rem;
+        }
+
+        h3 {
+            font-size: 30px;
+        }
+
+        h4 {
+            font-size: 15px;
+        }
+
+        p {
+            font-size: 14px;
+        }
+
+        .testimonials-carousel {
+            margin: 3rem auto;            
+            max-width: none;
+            height: 25rem;
+        }
+
+        .testimonials-card {
+            flex: 0 0 70vw;
+            min-height: auto;
+
+            & img {
+                width: 8rem;
+            }
+
+            .divisory-line {
+                margin: 2rem 0;
+            }
+
+            .card-content {
+                flex-direction: row; /* Vuelta a row en tablet */
+                align-items: flex-start;
+
+                .card-content--text {
+                    text-align: left; /* Vuelta a izquierda en tablet */
+                }
+            }
+        }
+    }
+}
+
+/* Desktop (1024px en adelante) */
+@media (min-width: 1024px) {
+    .testimonials {
+        h2 {
+            font-size: 24px;
+            margin-top: 8rem;
+        }
+
+        h3 {
+            font-size: 36px;
+        }
+
+        h4 {
+            font-size: 16px;
+        }
+
+        p {
+            font-size: 15px;
+        }
+
+        .testimonials-carousel {
+            width: 90rem;
+            height: 28rem;
+        }
+
+        .testimonials-card {
+            flex: 0 0 80vw;
+
+            & img {
+                width: 9rem;
+            }
+        }
+    }
+}
+
+/* Desktop grande (1440px en adelante) */
+@media (min-width: 1440px) {
+    .testimonials {
+        h2 {
+            font-size: 26px;
+        }
+
+        h3 {
+            font-size: 40px;
+        }
+
+        .testimonials-carousel {
+            width: 100rem;
+            height: 30rem;
+        }
+
+        .testimonials-card {
+            /* flex: 0 0 80rem; */
+
+            & img {
+                width: 10rem;
+            }
+        }
+    }
+}

@@ -1,0 +1,44 @@
+<section id="section-about" class="section section-about-us about-us">
+    <div class="container">
+        <!-- Título principal de la sección -->
+        <div class="about-us__header">
+            <h2 class="about-us__title">{{ title() }}</h2>
+        </div>
+
+        <!-- Grid de tarjetas -->
+        <div class="about-us__grid">
+            @for (item of items(); track item.id; let i = $index) {
+            <!-- Card -->
+            <article class="about-us__card hover-effect-global" (click)="openModal(i, $event)">
+                <div class="about-us__card-image">
+                    <img [src]="item.imageUrl" [alt]="item.title" class="about-us__image" loading="lazy">
+                </div>
+                <div class="about-us__card-content">
+                    <h3 class="about-us__card-title">{{ item.title }}</h3>
+                </div>
+            </article>
+            }
+        </div>
+
+        <!-- Renderizado del Lightbox Modal Condicional Textual -->
+        @if (activeItemIndex() !== null) {
+        <figure class="lightbox-modal">
+            <div class="modal-card">
+                <div class="modal-card-image">
+                    <img [src]="items()[activeItemIndex()!].imageUrl" [alt]="items()[activeItemIndex()!].title"
+                        loading="lazy">
+                </div>
+                <div class="modal-card-body">
+                    <h3 style="margin-bottom: 2rem;">{{ items()[activeItemIndex()!].title }}</h3>
+                    <p>{{ items()[activeItemIndex()!].description || 'There is no additional description for this item
+                        at the moment.' }}</p>
+                </div>
+            </div>
+
+            <!-- Cerramos modal superior general -->
+            <a class="close" href="#" (click)="closeModal($event)" aria-label="Cerrar"></a>
+        </figure>
+        }
+
+    </div>
+</section>

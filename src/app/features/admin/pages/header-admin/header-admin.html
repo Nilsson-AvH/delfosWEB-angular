@@ -1,0 +1,158 @@
+<div class="admin-panel animate__animated animate__fadeIn">
+    <h2>Header Configuration</h2>
+
+    <!-- Contact Info Section -->
+    <div class="admin-section">
+        <h3>Contact Information</h3>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Contact Number (Header Top Left)</label>
+                <input type="text" [(ngModel)]="contactNumberForm" placeholder="(+XX) XXX XXX XXXX"
+                    class="form-control">
+            </div>
+            <button class="btn-primary" (click)="saveContactNumber()"><i class="fa-solid fa-save"></i> Save
+                Number</button>
+        </div>
+    </div>
+
+    <!-- Utils Button Configuration Section -->
+    <div class="admin-section">
+        <h3>Utils Button Configuration</h3>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Main Button Title (e.g., Utils)</label>
+                <input type="text" [(ngModel)]="utilsTitleForm" class="form-control">
+            </div>
+        </div>
+        <button class="btn-primary" style="margin-top: 0.5rem; margin-bottom: 2rem;" (click)="saveUtilsTitle()"><i
+                class="fa-solid fa-save"></i> Save Title</button>
+
+        <h4>Utils Dropdown Links</h4>
+        <!-- List of Utils Links -->
+        <div class="items-list">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Text</th>
+                        <th>Type</th>
+                        <th>Target</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let link of utilsLinks">
+                        <td>{{link.text}}</td>
+                        <td><span class="badge" [ngClass]="link.type">{{link.type}}</span></td>
+                        <td>{{link.target}}</td>
+                        <td class="actions">
+                            <button class="btn-outline" style="padding: 0.5rem 1rem;" (click)="editUtilsLink(link)"><i
+                                    class="fa-solid fa-pencil"></i></button>
+                            <button class="btn-danger" style="padding: 0.5rem 1rem;" (click)="deleteUtilsLink(link.id!)"><i
+                                    class="fa-solid fa-trash"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Add/Edit Utils Link Form -->
+        <div class="form-card edit-form">
+            <h4>{{ editingUtilsLinkId ? 'Edit Utils Link' : 'Add New Utils Link' }}</h4>
+            <div class="form-group">
+                <label>Link Text</label>
+                <input type="text" [(ngModel)]="newUtilsLink.text" class="form-control" placeholder="e.g. Asha CRM">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Link Type</label>
+                    <select [(ngModel)]="newUtilsLink.type" class="form-control">
+                        <option value="internal">Internal Anchor (Scroll to #section)</option>
+                        <option value="route">Angular Route (/path)</option>
+                        <option value="external">External URL (http://...)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Target</label>
+                    <input type="text" [(ngModel)]="newUtilsLink.target" class="form-control"
+                        [placeholder]="newUtilsLink.type === 'internal' ? '#section-id' : (newUtilsLink.type === 'route' ? '/path' : 'https://...')">
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn-primary" (click)="saveUtilsLink()"><i class="fa-solid fa-save"></i> {{ editingUtilsLinkId ?
+                    'Update Link' : 'Add Link' }}</button>
+                <button *ngIf="editingUtilsLinkId" class="btn-outline" (click)="cancelUtilsEdit()"><i
+                        class="fa-solid fa-times"></i> Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Links Section -->
+    <div class="admin-section">
+        <h3>Menu Links Configuration</h3>
+
+        <!-- List of Links -->
+        <div class="items-list">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Text</th>
+                        <th>Type</th>
+                        <th>Target</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let link of links">
+                        <td>{{link.text}}</td>
+                        <td><span class="badge" [ngClass]="link.type">{{link.type}}</span></td>
+                        <td>{{link.target}}</td>
+                        <td class="actions">
+                            <button class="btn-outline" style="padding: 0.5rem 1rem;" (click)="editLink(link)"><i
+                                    class="fa-solid fa-pencil"></i></button>
+                            <button class="btn-danger" style="padding: 0.5rem 1rem;" (click)="deleteLink(link.id!)"><i
+                                    class="fa-solid fa-trash"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Add/Edit Link Form -->
+        <div class="form-card edit-form">
+            <h4>{{ editingLinkId ? 'Edit Link' : 'Add New Link' }}</h4>
+            <div class="form-group">
+                <label>Link Text</label>
+                <input type="text" [(ngModel)]="newLink.text" class="form-control" placeholder="e.g. Services">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Link Type</label>
+                    <select [(ngModel)]="newLink.type" class="form-control">
+                        <option value="internal">Internal Anchor (Scroll to #section)</option>
+                        <option value="route">Angular Route (/path)</option>
+                        <option value="external">External URL (http://...)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Target</label>
+                    <input type="text" [(ngModel)]="newLink.target" class="form-control"
+                        [placeholder]="newLink.type === 'internal' ? '#section-id' : (newLink.type === 'route' ? '/path' : 'https://...')">
+                    <small *ngIf="newLink.type === 'internal'" class="help-text">Use HTML Element IDs (e.g.
+                        #section-about)</small>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn-primary" (click)="saveLink()"><i class="fa-solid fa-save"></i> {{ editingLinkId ?
+                    'Update Link' : 'Add Link' }}</button>
+                <button *ngIf="editingLinkId" class="btn-outline" (click)="cancelEdit()"><i
+                        class="fa-solid fa-times"></i> Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
