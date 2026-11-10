@@ -36,7 +36,7 @@ export class HomeComponent {
       { property: 'og:title', content: 'Seguridad Delfos Ltda' },
       { property: 'og:description', content: 'Soluciones integrales de seguridad privada y vigilancia.' },
       { property: 'og:image', content: 'assets/images/big-logo.png' },
-      { property: 'og:url', content: 'https://www.seguridaddelfos.com.co' }
+      { property: 'og:url', content: 'https://www.seguridaddelfos.com' }
     ]);
   }
 }

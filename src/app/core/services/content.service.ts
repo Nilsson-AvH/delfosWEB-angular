@@ -12,7 +12,7 @@ export class ContentService {
     utilsTitle = signal<string>('Utils');
     utilsLinks = signal<ContentLink[]>([
         { id: '1', text: 'Asha CRM', type: 'external', target: 'http://asha-crm-url.com' },
-        { id: '2', text: 'RondaKey', type: 'external', target: 'http://rondakey-url.com' }
+        { id: '2', text: 'RondaKey', type: 'external', target: 'https://rondakey.seguridaddelfos.com/login' }
     ]);
     headerLinks = signal<ContentLink[]>([
         { id: '1', text: 'Home', type: 'route', target: '/home' },
