@@ -1,59 +1,50 @@
-# DelfosAngular
+# Seguridad Delfos Ltda · Sitio web
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.4.
+Sitio en Angular 21 publicado en **https://seguridaddelfos.com** (Cloudflare Pages + Cloudflare Access para `/admin`).
 
-## Development server
-
-To start a local development server, run:
+## Desarrollo
 
 ```bash
-ng serve
+npm install
+npm run dev      # página (http://localhost:4200) + servidor local de guardado (http://localhost:3000)
+npm run build    # compila en dist/delfos-angular/browser
+npm test
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+El contenido del sitio vive en `src/assets/data.json` y se incluye en la compilación (la página se pinta sin parpadeos).
 
-## Code scaffolding
+## Panel administrador (`/admin`)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+El panel guarda los cambios en un lugar distinto según dónde se use:
 
-```bash
-ng generate component component-name
-```
+| Dónde | Qué pasa al guardar |
+| --- | --- |
+| Local (`npm run dev`) | Se escribe `src/assets/data.json`; los archivos subidos van a `public/images` y `public/pdf`. La página se recarga sola. Luego se hace commit y push. |
+| Sitio publicado | Se guarda en Cloudflare KV y se publica al instante (sin volver a desplegar). Los archivos subidos se sirven en `/media/...`. |
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Activar el guardado en el sitio publicado (una sola vez)
 
-```bash
-ng generate --help
-```
+El código ya está listo (carpeta `functions/` = Cloudflare Pages Functions). Solo falta crear el almacenamiento:
 
-## Building
+1. En el panel de Cloudflare: **Storage & Databases → KV → Create namespace**, por ejemplo `delfos-contenido`.
+2. En **Workers & Pages → (proyecto del sitio) → Settings → Bindings → Add → KV namespace**:
+   nombre de la variable **`DELFOS_KV`**, namespace `delfos-contenido`. Hazlo para *Production* (y *Preview* si lo usas).
+3. Vuelve a desplegar (un push a la rama principal o **Retry deployment**).
+4. Entra a `https://seguridaddelfos.com/admin`: en la parte superior debe decir *“Sitio publicado · los cambios se publican al guardar”*.
 
-To build the project run:
+Seguridad: las escrituras (`/admin/api/*`) verifican la firma del token de **Cloudflare Access** (equipo
+`dincordevelopers`). Si cambias la aplicación de Access, configura las variables de entorno `ACCESS_TEAM_DOMAIN`
+y `ACCESS_AUD` (Application Audience Tag) en el proyecto de Pages.
 
-```bash
-ng build
-```
+### Importante: contenido del panel vs. código
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Cuando se guarda desde el panel publicado, ese contenido tiene prioridad sobre `src/assets/data.json`.
+Antes de editar textos en el código, descarga el contenido actual desde **Resumen → Descargar contenido (data.json)**
+y reemplaza `src/assets/data.json`. El botón **Restablecer al contenido del código** borra lo guardado en el panel
+(queda un respaldo en la clave `content:previous` del KV).
 
-## Running unit tests
+## PQRS
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+La sección PQRS arma la solicitud (con número de radicado) y la abre en el correo del visitante
+(aplicación de correo, Gmail u Outlook/Hotmail) con el asunto `PQRS WEB DELFOS - <asunto>`.
+El correo de destino se cambia en **Admin → PQRS**.

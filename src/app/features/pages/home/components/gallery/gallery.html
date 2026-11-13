@@ -1,29 +1,36 @@
-<section id="section-gallery" class="section section-gallery gallery">
-    <div class="container">
-        <h2>{{ title() }}</h2>
-        <h2>{{ subtitle() }}</h2>
-        <div class="carousel-gallery">
-            @for (item of items(); track item.id; let i = $index) {
-            <a href="#" (click)="openLightbox(i, $event)" class="card card-gallery hover-effect-global">
-                <img [src]="item.imageUrl" [alt]="item.alt" loading="lazy">
-            </a>
-            }
-        </div>
+<section id="section-gallery" class="section grid-bg gallery">
+  <div class="container">
+    <header class="section-head" appReveal>
+      <p class="eyebrow">{{ subtitle() }}</p>
+      <h2 class="section-title">{{ title() }}</h2>
+    </header>
 
-        @if (activeImageIndex() !== null) {
-        <figure class="lightbox-modal">
-            <img [src]="items()[activeImageIndex()!].imageUrl" [alt]="items()[activeImageIndex()!].alt" loading="lazy">
-
-            <button class="nav prev scroll-top-btn" (click)="prevImage($event)" aria-label="Anterior">
-                &#10094;
-            </button>
-            <button class="nav next scroll-top-btn" (click)="nextImage($event)" aria-label="Siguiente">
-                &#10095;
-            </button>
-
-            <a class="close" href="#" (click)="closeLightbox($event)" aria-label="Cerrar"></a>
-        </figure>
-        }
-
+    <div class="gallery__grid">
+      @for (item of items(); track item.id; let i = $index) {
+      <button type="button" class="gallery__item" (click)="openLightbox(i)" appReveal [revealDelay]="(i % 3) * 80"
+        [attr.aria-label]="'Ampliar imagen: ' + item.alt">
+        <img [src]="item.imageUrl" [alt]="item.alt" loading="lazy" decoding="async" width="600" height="400">
+        <span class="gallery__zoom"><app-icon name="search" [size]="22" /></span>
+      </button>
+      }
     </div>
+  </div>
 </section>
+
+@if (activeImageIndex() !== null) {
+<app-modal size="media" label="Galería de fotos" (closed)="closeLightbox()">
+  <figure class="viewer">
+    <img [src]="items()[activeImageIndex()!].imageUrl" [alt]="items()[activeImageIndex()!].alt">
+    <figcaption>
+      <span>{{ items()[activeImageIndex()!].alt }}</span>
+      <span class="muted">{{ activeImageIndex()! + 1 }} / {{ items().length }}</span>
+    </figcaption>
+    <button type="button" class="btn btn--icon viewer__nav viewer__nav--prev" (click)="prevImage()" aria-label="Imagen anterior">
+      <app-icon name="chevron-left" [size]="22" />
+    </button>
+    <button type="button" class="btn btn--icon viewer__nav viewer__nav--next" (click)="nextImage()" aria-label="Imagen siguiente">
+      <app-icon name="chevron-right" [size]="22" />
+    </button>
+  </figure>
+</app-modal>
+}

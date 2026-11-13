@@ -6,6 +6,8 @@ export interface Slide {
     imageMobile: string;
     linkText: string;
     linkUrl: string;
+    /** Texto ampliado que se muestra en la ventana "Ver más" (opcional). */
+    details?: string;
 }
 
 export interface AboutUsItem {
@@ -50,12 +52,57 @@ export interface NewsItem {
     linkUrl: string;
     iframeUrl?: string; // Para incrustar artículos (ej. El Tiempo) sin salir
     description?: string; // Para noticias de texto directo
+    source?: string; // Fuente y fecha, ej. "Supervigilancia · julio de 2025"
+}
+
+export interface SocialLinks {
+    instagram: string;
+    facebook: string;
+    tiktok: string;
+    linkedin: string;
+}
+
+export interface PqrsContent {
+    title: string;
+    text: string;
+    /** Correo que recibe las PQRS */
+    email: string;
+    buttonText: string;
 }
 
 export interface PreFooterContent {
     text: string;
     pdfUrl: string;
     pdfButtonText: string;
+}
+
+export interface SiteContent {
+    slides: Slide[];
+    aboutUsTitle: string;
+    aboutUsItems: AboutUsItem[];
+    servicesTitle: string;
+    servicesSubtitle: string;
+    services: ServiceItem[];
+    indicatorsTitle: string;
+    indicators: Indicator[];
+    galleryTitle: string;
+    gallerySubtitle: string;
+    galleryItems: GalleryItem[];
+    testimonialsTitle: string;
+    testimonialsSubtitle: string;
+    testimonials: Testimonial[];
+    newsTitle: string;
+    newsSubtitle: string;
+    newsItems: NewsItem[];
+    preFooter: PreFooterContent;
+    contactNumber: string;
+    utilsTitle: string;
+    utilsLinks: ContentLink[];
+    headerLinks: ContentLink[];
+    footerAbout: FooterAbout;
+    footerMainLinks: ContentLink[];
+    socialLinks: SocialLinks;
+    pqrs: PqrsContent;
 }
 
 export interface ContactInfo {

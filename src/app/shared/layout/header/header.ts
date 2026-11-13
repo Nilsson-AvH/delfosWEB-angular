@@ -2,13 +2,13 @@ import { Component, computed, inject, signal, HostListener, ElementRef } from '@
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { ContentService } from '../../../core/services/content.service';
-import { ViewportScroller } from '@angular/common';
 import { ContentLink } from '../../../core/models/content.interface';
-import { FormsModule } from '@angular/forms';
+import { Icon } from '../../components/icon/icon';
+import { Modal } from '../../components/modal/modal';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, FormsModule],
+  imports: [RouterLink, Icon, Modal],
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
@@ -16,137 +16,125 @@ export class Header {
   private authService = inject(AuthService);
   private contentService = inject(ContentService);
   private elementRef = inject(ElementRef);
-  router = inject(Router);
-  viewportScroller = inject(ViewportScroller);
-  isLoggedIn = this.authService.isLoggedIn;
+  private router = inject(Router);
 
-  // Signals
+  isLoggedIn = this.authService.isLoggedIn;
   contactNumber = this.contentService.contactNumber;
   utilsTitle = this.contentService.utilsTitle;
   utilsLinks = this.contentService.utilsLinks;
   headerLinks = this.contentService.headerLinks;
+  social = this.contentService.socialLinks;
+  cleanPhone = computed(() => this.contactNumber().replace(/\D/g, ''));
 
-  // Search Logic state
+  isScrolled = signal(false);
   isSearchOpen = signal(false);
+  isMobileMenuOpen = signal(false);
+  isUtilsMenuOpen = signal(false);
   searchQuery = signal('');
 
-  // Computed results merging multiple array titles from ContentService
   searchResults = computed(() => {
-    const q = this.searchQuery().toLowerCase().trim();
+    const q = this.normalize(this.searchQuery());
     if (!q) return [];
+    const results: { title: string; hash: string; type: string }[] = [];
 
-    const results: { title: string, hash: string, type: string }[] = [];
-
-    // Buscar en Servicios
     this.contentService.services().forEach(s => {
-      if (s.title.toLowerCase().includes(q) || s.description.toLowerCase().includes(q)) {
-        results.push({ title: s.title, hash: 'section-services', type: 'Service' });
+      if (this.normalize(s.title + ' ' + s.description).includes(q)) {
+        results.push({ title: s.title, hash: 'section-services', type: 'Servicio' });
       }
     });
-
-    // Buscar en Noticias
+    this.contentService.slides().forEach(s => {
+      if (this.normalize(s.title + ' ' + s.text).includes(q)) {
+        results.push({ title: s.title, hash: 'section-carousel', type: 'Destacado' });
+      }
+    });
     this.contentService.newsItems().forEach(n => {
-      if (n.title.toLowerCase().includes(q)) {
-        results.push({ title: n.title, hash: 'section-news', type: 'News' });
+      if (this.normalize(n.title + ' ' + (n.description || '')).includes(q)) {
+        results.push({ title: n.title, hash: 'section-news', type: 'Noticia' });
       }
     });
-
-    // Buscar en Menú Principal
     this.contentService.headerLinks().forEach(l => {
-      if (l.text.toLowerCase().includes(q) && l.type === 'internal') {
-        const cleanHash = l.target.startsWith('#') ? l.target.substring(1) : l.target;
-        results.push({ title: l.text, hash: cleanHash, type: 'Section' });
+      if (l.type === 'internal' && this.normalize(l.text).includes(q)) {
+        results.push({ title: l.text, hash: l.target.replace(/^#/, ''), type: 'Sección' });
       }
     });
-
     return results;
   });
 
-  toggleSearch(event: Event) {
-    event.preventDefault();
-    this.isSearchOpen.set(!this.isSearchOpen());
-    if (!this.isSearchOpen()) {
-      this.searchQuery.set(''); // clean on close
-    }
+  private normalize(v: string) {
+    return v.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
   }
 
-  isMobileMenuOpen = signal(false);
+  @HostListener('window:scroll')
+  onScroll() {
+    const scrolled = window.scrollY > 10;
+    if (scrolled !== this.isScrolled()) this.isScrolled.set(scrolled);
+  }
+
+  toggleSearch(event: Event) {
+    event.preventDefault();
+    this.isMobileMenuOpen.set(false);
+    this.isSearchOpen.update(v => !v);
+  }
+
+  closeSearch() {
+    this.isSearchOpen.set(false);
+    this.searchQuery.set('');
+  }
 
   toggleMobileMenu(event: Event) {
     event.preventDefault();
-    this.isMobileMenuOpen.update(val => !val);
+    this.isMobileMenuOpen.update(v => !v);
   }
-
-  isUtilsMenuOpen = signal(false);
 
   toggleUtilsMenu(event: Event) {
     event.preventDefault();
-    this.isUtilsMenuOpen.update(val => !val);
+    this.isUtilsMenuOpen.update(v => !v);
+  }
+
+  goHome(event: Event) {
+    event.preventDefault();
+    this.isMobileMenuOpen.set(false);
+    this.router.navigateByUrl('/').then(() => window.scrollTo({ top: 0, behavior: 'smooth' }));
   }
 
   handleSearchResultClick(event: Event, hash: string) {
     event.preventDefault();
-    this.isSearchOpen.set(false);
-    this.searchQuery.set('');
-
-    const urlTree = this.router.createUrlTree(['/']);
-    this.router.navigateByUrl(urlTree).then(() => {
-      setTimeout(() => {
-        const element = document.getElementById(hash);
-        if (element) {
-          const y = element.getBoundingClientRect().top + window.scrollY;
-          window.scrollTo({ top: y, behavior: 'smooth' });
-        }
-      }, 100);
-    });
+    this.closeSearch();
+    this.scrollToSection(hash);
   }
 
   logout(event: Event) {
     event.preventDefault();
+    this.isUtilsMenuOpen.set(false);
     this.authService.logout();
   }
 
   handleLinkClick(event: Event, link: ContentLink) {
     event.preventDefault();
-
     if (link.type === 'internal') {
-      const urlTree = this.router.createUrlTree(['/']);
-      this.router.navigateByUrl(urlTree).then(() => {
-        // We expect the target to be like "#section" => extract "section"
-        const anchor = link.target.startsWith('#') ? link.target.substring(1) : link.target;
-        setTimeout(() => {
-          const element = document.getElementById(anchor);
-          if (element) {
-            const y = element.getBoundingClientRect().top + window.scrollY;
-            window.scrollTo({ top: y, behavior: 'smooth' });
-          }
-        }, 100);
-      });
+      this.scrollToSection(link.target.replace(/^#/, ''));
     } else if (link.type === 'route') {
-      this.router.navigate([link.target]);
-    } else if (link.type === 'external') {
-      window.open(link.target, '_blank');
+      this.router.navigateByUrl(link.target).then(() => {
+        if (link.target === '/' ) window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    } else {
+      window.open(link.target, '_blank', 'noopener');
     }
+  }
+
+  private scrollToSection(id: string) {
+    this.router.navigateByUrl('/').then(() => {
+      setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
+    });
   }
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
-
-    // Check Utils menu
-    const utilsDropdown = this.elementRef.nativeElement.querySelector('.utils-dropdown');
-    if (utilsDropdown && !utilsDropdown.contains(target)) {
-      this.isUtilsMenuOpen.set(false);
-    }
-
-    // Check Mobile Hamburger menu
-    const mobileMenu = this.elementRef.nativeElement.querySelector('.header-menu');
-    const hamburgerBtn = this.elementRef.nativeElement.querySelector('.hamburger-btn');
-    if (mobileMenu && hamburgerBtn) {
-      if (!mobileMenu.contains(target) && !hamburgerBtn.contains(target)) {
-        this.isMobileMenuOpen.set(false);
-      }
+    const host = this.elementRef.nativeElement as HTMLElement;
+    if (!host.querySelector('.utils')?.contains(target)) this.isUtilsMenuOpen.set(false);
+    if (!host.querySelector('.nav')?.contains(target) && !host.querySelector('.hamburger')?.contains(target)) {
+      this.isMobileMenuOpen.set(false);
     }
   }
 }
-

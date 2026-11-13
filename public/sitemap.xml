@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Página principal -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://www.seguridaddelfos.com/</loc>
-    <lastmod>2026-03-10</lastmod>
-    <changefreq>daily</changefreq>
+    <loc>https://seguridaddelfos.com/</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-  </url>
-  <!-- Página de Ingreso (Login) -->
-  <url>
-    <loc>https://www.seguridaddelfos.com/login</loc>
-    <lastmod>2026-03-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <image:image><image:loc>https://seguridaddelfos.com/images/og-image.jpg</image:loc></image:image>
+    <image:image><image:loc>https://seguridaddelfos.com/images/generated-image01.webp</image:loc></image:image>
+    <image:image><image:loc>https://seguridaddelfos.com/images/generated-image02.webp</image:loc></image:image>
+    <image:image><image:loc>https://seguridaddelfos.com/images/generated-image03.webp</image:loc></image:image>
+    <image:image><image:loc>https://seguridaddelfos.com/images/generated-image04.webp</image:loc></image:image>
   </url>
 </urlset>

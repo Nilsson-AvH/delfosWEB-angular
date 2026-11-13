@@ -1,9 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { ContentService } from '../../../../../core/services/content.service';
+import { Icon } from '../../../../../shared/components/icon/icon';
+import { Reveal } from '../../../../../shared/directives/reveal';
 
 @Component({
   selector: 'app-our-services',
-  imports: [],
+  imports: [Icon, Reveal],
   templateUrl: './our-services.html',
   styleUrl: './our-services.scss',
 })

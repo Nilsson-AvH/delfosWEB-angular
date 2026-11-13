@@ -1,49 +1,64 @@
-<footer class="footer footer__background">
+<footer class="footer" id="section-contact">
+  <div class="container footer__grid">
+    <section class="footer__col footer__about">
+      <a href="/" class="footer__brand" (click)="goTop($event)">
+        <img src="images/logo-shield.webp" alt="Escudo Seguridad Delfos Ltda" width="52" height="47" loading="lazy">
+        <span>{{ footerAbout().title }}</span>
+      </a>
+      <p>{{ footerAbout().description }}</p>
+      <div class="footer__social">
+        @for (s of socialList(); track s.name) {
+        <a class="btn btn--icon btn--sm" [href]="s.url" target="_blank" rel="noopener" [attr.aria-label]="'Delfos en ' + s.label" [title]="s.label">
+          <app-icon [name]="s.name" [size]="17" />
+        </a>
+        }
+        <a class="btn btn--icon btn--sm" [href]="'https://wa.me/' + cleanPhone()" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">
+          <app-icon name="whatsapp" [size]="17" />
+        </a>
+      </div>
+      <a class="footer__badge" href="https://www.supervigilancia.gov.co/" target="_blank" rel="noopener">
+        <app-icon name="shield-check" [size]="18" />
+        Vigilada por la Supervigilancia
+      </a>
+    </section>
+
+    <nav class="footer__col" aria-label="Enlaces del pie de página">
+      <h2>Enlaces</h2>
+      <ul class="footer__links">
+        @for (link of footerMainLinks(); track link.id) {
+        <li><a [href]="link.type === 'internal' ? '/' + link.target : link.target" (click)="handleLinkClick($event, link)">
+          <app-icon name="chevron-right" [size]="14" />{{ link.text }}</a></li>
+        }
+      </ul>
+    </nav>
+
+    <section class="footer__col">
+      <h2>Últimas noticias</h2>
+      <ul class="footer__links">
+        @for (n of latestNews(); track n.id) {
+        <li><a href="/#section-news" (click)="scrollTo($event, 'section-news')">
+          <app-icon name="news" [size]="14" />{{ n.title }}</a></li>
+        }
+      </ul>
+    </section>
+
+    <section class="footer__col">
+      <h2>Contacto</h2>
+      <ul class="footer__contact">
+        <li><app-icon name="phone" [size]="16" /><a [href]="'tel:+' + cleanPhone()">{{ contactNumber() }}</a></li>
+        <li><app-icon name="whatsapp" [size]="16" /><a [href]="'https://wa.me/' + cleanPhone()" target="_blank" rel="noopener">Escríbenos por WhatsApp</a></li>
+        <li><app-icon name="mail" [size]="16" /><a [href]="'mailto:' + pqrsEmail()">{{ pqrsEmail() }}</a></li>
+        <li><app-icon name="message" [size]="16" /><a href="/#section-pqrs" (click)="scrollTo($event, 'section-pqrs')">Radicar una PQRS</a></li>
+        <li><app-icon name="map-pin" [size]="16" /><span>Bogotá D.C., Colombia · Cobertura nacional</span></li>
+        <li><app-icon name="clock" [size]="16" /><span>Atención 24 horas, 7 días a la semana</span></li>
+      </ul>
+    </section>
+  </div>
+
+  <div class="footer__bottom">
     <div class="container">
-        <div class="sections-footer">
-            <section class="col footer-card-1">
-                <h2>{{ footerAbout().title }}</h2>
-                <p>{{ footerAbout().description }}</p>
-            </section>
-
-            <section class="col footer-card-2">
-                <h2>Latest Post</h2>
-                <ul>
-                    <li class="links-card-2"><a href="#section-carousel" class="post-link">
-                            <i class="fa-solid fa-user-shield"></i>Revealed: How to set goals for you and your team</a>
-                    </li>
-
-                    <li class="links-card-2"><a href="#section-two-carousel" class="post-link">
-                            <i class="fa-solid fa-lock"></i>Five ways to improve as a business professional!</a>
-                    </li>
-                </ul>
-            </section>
-
-            <nav class="col footer-card-3">
-                <h2>Main Links</h2>
-                <ul>
-                    @for (link of footerMainLinks(); track link.id) {
-                    <li><a href="#" (click)="handleLinkClick($event, link)">{{ link.text }}</a></li>
-                    }
-                </ul>
-            </nav>
-            <section class="col footer-card-4">
-                <h2>Newsletter</h2>
-                <p>Don't miss to subscribe to our news feeds, kindly fill the form below</p>
-                <form action="">
-                    <input type="text" name="subscribe" value="">
-                    <!-- TODO: Por favor colocar el boton del formulario -->
-                </form>
-            </section>
-        </div>
+      <p>© {{ currentYear }} {{ footerAbout().title }}. Todos los derechos reservados.</p>
+      <p class="muted">Vigilancia y seguridad privada en Bogotá, Colombia.</p>
     </div>
+  </div>
 </footer>
-
-<section class="post-footer">
-    <div class="container">
-        <div class="post-footer-bar">
-            <!-- Dynamic copyright generation -->
-            <p>&copy; Copyright <a href="#section-carousel">{{ footerAbout().title }}</a> {{ currentYear }}. All rights reserved</p>
-        </div>
-    </div>
-</section>

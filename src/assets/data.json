@@ -2,12 +2,13 @@
   "slides": [
     {
       "id": "1",
-      "title": "Seguridad Fisica",
+      "title": "Seguridad Física",
       "text": "Personal altamente capacitado brinda protección presencial en instalaciones comerciales y residenciales. Garantizamos control de acceso, rondas preventivas y respuesta inmediata ante cualquier eventualidad las 24 horas del día.",
       "imageDesktop": "images/generated-image01.webp",
       "imageMobile": "images/generated-image01-mf.webp",
-      "linkText": "Learn More",
-      "linkUrl": "#"
+      "linkText": "Ver más",
+      "linkUrl": "#",
+      "details": "Nuestros guardas de seguridad están certificados y acreditados ante la Superintendencia de Vigilancia y Seguridad Privada, y reciben capacitación continua en control de acceso, primeros auxilios, atención al cliente y manejo de situaciones de riesgo.\n\nDiseñamos para cada cliente un plan de servicio a la medida: puestos fijos 12 o 24 horas, rondas preventivas, registro de visitantes y vehículos, y protocolos de reacción ante emergencias. Cada puesto cuenta con supervisión permanente y comunicación directa con nuestra central de monitoreo."
     },
     {
       "id": "2",
@@ -15,44 +16,49 @@
       "text": "Centro de monitoreo operando 24/7 con tecnología avanzada y personal especializado. Coordinamos operaciones de seguridad, gestionamos alarmas y videoseguridad en tiempo real para respuesta inmediata ante emergencias.",
       "imageDesktop": "images/generated-image02.webp",
       "imageMobile": "images/generated-image02-mf.webp",
-      "linkText": "Learn More",
-      "linkUrl": "#"
+      "linkText": "Ver más",
+      "linkUrl": "#",
+      "details": "Nuestra central de monitoreo opera las 24 horas, los 365 días del año, con operadores entrenados que coordinan a los guardas en campo, supervisan las rondas y gestionan en tiempo real las alarmas y cámaras de nuestros clientes.\n\nAnte cualquier novedad, la central activa de inmediato los protocolos de reacción: comunicación con el puesto, despacho de supervisión motorizada y, cuando se requiere, enlace con la Policía Nacional y los organismos de emergencia. Todos los eventos quedan registrados para su trazabilidad."
     },
     {
       "id": "3",
       "title": "Seguridad Complejos Residenciales",
-      "text": "Vigilancia especializada para conjuntos residenciales con protocolos de propiedad horizontal. Ofrecemos guardas certificados, control de ingreso de visitantes, monitoreo de zonas comunes y atención permanente para tranquilidad de los residentes.",
+      "text": "Vigilancia especializada para conjuntos residenciales bajo los protocolos de propiedad horizontal. Guardas certificados, control de visitantes, monitoreo de zonas comunes y supervisión de rondas en tiempo real con nuestro software RondaKey.",
       "imageDesktop": "images/generated-image03.webp",
       "imageMobile": "images/generated-image03-mf.webp",
-      "linkText": "Learn More",
-      "linkUrl": "#"
+      "linkText": "Ver más",
+      "linkUrl": "#",
+      "details": "Protegemos conjuntos residenciales y edificios de propiedad horizontal con guardas certificados, control de ingreso de visitantes, residentes, domicilios y vehículos, y vigilancia permanente de zonas comunes, parqueaderos y perímetros.\n\nAdemás, contamos con RondaKey, nuestro software propio de control de rondas: cada guarda registra con su dispositivo los puntos de control del recorrido, y la administración puede verificar en tiempo real que las rondas se cumplan en el horario y la ruta establecidos, con reportes de novedades, evidencias fotográficas e historial disponible en cualquier momento. Transparencia total para el consejo de administración y tranquilidad para los residentes."
     },
     {
       "id": "4",
-      "title": "Servicio de monitoreo de CCTV",
+      "title": "Monitoreo de CCTV",
       "text": "Monitoreo remoto de cámaras de seguridad desde nuestro centro de control. Supervisión continua de imágenes en tiempo real, detección de actividades sospechosas y almacenamiento seguro de grabaciones para documentación y evidencia.",
       "imageDesktop": "images/generated-image04.webp",
       "imageMobile": "images/generated-image04-mf.webp",
-      "linkText": "Learn More",
-      "linkUrl": "#"
+      "linkText": "Ver más",
+      "linkUrl": "#",
+      "details": "Instalamos y monitoreamos sistemas de videovigilancia (CCTV) para empresas, comercios y conjuntos residenciales. Nuestros operadores supervisan las cámaras de forma remota, detectan comportamientos sospechosos y reaccionan antes de que un incidente escale.\n\nLas grabaciones se almacenan de forma segura y pueden consultarse como soporte o evidencia ante las autoridades. Asesoramos a cada cliente en la ubicación de cámaras, la cobertura de puntos críticos y el cumplimiento de la normativa de protección de datos personales."
     },
     {
       "id": "5",
-      "title": "Supervision Motorizada",
+      "title": "Supervisión Motorizada",
       "text": "Patrullaje motorizado con escoltas certificados para desplazamientos ágiles y respuesta rápida. Ideal para supervisión de amplias zonas, reconocimiento de rutas y atención prioritaria a emergencias con máxima movilidad.",
       "imageDesktop": "images/generated-image05.webp",
       "imageMobile": "images/generated-image05-mf.webp",
-      "linkText": "Learn More",
-      "linkUrl": "#"
+      "linkText": "Ver más",
+      "linkUrl": "#",
+      "details": "Nuestros supervisores motorizados recorren de forma permanente los puestos de servicio para verificar la presencia, presentación y desempeño de cada guarda, apoyar ante novedades y reaccionar con rapidez en zonas de difícil acceso vehicular.\n\nSon el enlace directo entre el puesto y la central de monitoreo: atienden alarmas, realizan reconocimiento de rutas y garantizan que los estándares de servicio se cumplan en todo momento, de día y de noche."
     },
     {
       "id": "6",
-      "title": "Patrulla Movil",
+      "title": "Patrulla Móvil",
       "text": "Servicio de patrullaje vehicular para cobertura de extensas áreas con vigilancia preventiva y disuasoria. Unidades equipadas realizan rondas aleatorias, inspección perimetral y respuesta inmediata ante alertas de seguridad.",
       "imageDesktop": "images/generated-image06.webp",
       "imageMobile": "images/generated-image06-mf.webp",
-      "linkText": "Learn More",
-      "linkUrl": "#"
+      "linkText": "Ver más",
+      "linkUrl": "#",
+      "details": "Nuestras patrullas vehiculares realizan recorridos preventivos y aleatorios que disuaden a la delincuencia y amplían la cobertura en zonas industriales, condominios campestres, bodegas y áreas extensas.\n\nCada unidad cuenta con comunicación permanente con la central de monitoreo, lo que permite atender alertas, apoyar a los guardas de los puestos e inspeccionar perímetros con tiempos de respuesta cortos."
     }
   ],
   "aboutUsTitle": "Ofrecemos soluciones de seguridad rentables",
@@ -61,19 +67,19 @@
       "id": "1",
       "title": "Nuestra experiencia",
       "imageUrl": "images/keyboard-security.webp",
-      "description": "Con más de 25 años de trayectoria ininterrumpida en el sector de la seguridad privada, hemos consolidado operaciones a nivel nacional protegiendo infraestructuras críticas y clientes de alto valor."
+      "description": "Con más de 25 años de trayectoria ininterrumpida en el sector de la vigilancia y la seguridad privada, hemos protegido empresas, conjuntos residenciales, entidades e infraestructuras críticas en distintas regiones de Colombia.\n\nNuestra experiencia se traduce en procesos probados: estudios de seguridad antes de cada servicio, selección rigurosa del personal, capacitación permanente y supervisión 24 horas. Combinamos el conocimiento del terreno con tecnología propia, como nuestra central de monitoreo y el software de control de rondas RondaKey.\n\nEsta trayectoria nos ha permitido construir relaciones de largo plazo con nuestros clientes, basadas en la confianza, el cumplimiento y la capacidad de adaptarnos a las necesidades de cada sector."
     },
     {
       "id": "2",
       "title": "Historia de Delfos",
       "imageUrl": "images/security-cameras.webp",
-      "description": "Fundada en 2001 en Bogota, con la visión de transformar la vigilancia tradicional mediante la innovación tecnológica. Desde nuestros inicios hasta hoy, nuestra evolución constante nos mantiene como líderes del mercado."
+      "description": "Seguridad Delfos Ltda nació en Bogotá en 2001 con una idea clara: transformar la vigilancia tradicional incorporando tecnología, procesos y personal altamente capacitado. Desde entonces opera como empresa legalmente constituida y vigilada por la Superintendencia de Vigilancia y Seguridad Privada.\n\nA lo largo de los años ampliamos nuestro portafolio desde la vigilancia física hacia el monitoreo de CCTV, la supervisión motorizada, las patrullas móviles y el control de acceso biométrico, y desarrollamos herramientas propias para dar trazabilidad y transparencia a cada servicio.\n\nHoy, más de dos décadas después, seguimos creciendo con la misma convicción: la seguridad se construye con personas comprometidas, tecnología confiable y cercanía con cada cliente."
     },
     {
       "id": "3",
-      "title": "Mision",
+      "title": "Misión",
       "imageUrl": "images/security-dial.webp",
-      "description": "Nuestra misión es salvaguardar vidas, bienes y la tranquilidad absoluta de nuestros clientes, apoyados en personal altamente calificado y tecnología de vanguardia bajo estrictos protocolos de ética."
+      "description": "Nuestra misión es salvaguardar la vida, los bienes y la tranquilidad de nuestros clientes mediante servicios de vigilancia y seguridad privada confiables, oportunos y ajustados a la ley, apoyados en personal altamente calificado y en tecnología de vanguardia.\n\nTrabajamos bajo estrictos principios de ética, respeto por los derechos humanos y cumplimiento de la normativa colombiana, y promovemos el bienestar y el desarrollo de nuestro talento humano, porque sabemos que un equipo motivado presta un mejor servicio.\n\nNuestra visión es consolidarnos como una de las empresas de seguridad privada más confiables del país, reconocida por la innovación, la calidad del servicio y la cercanía con cada cliente."
     }
   ],
   "servicesTitle": "Qué ofrecemos",
@@ -111,14 +117,14 @@
       "id": "5",
       "iconBg": "fa-solid fa-circle",
       "icon": "fa-solid fa-person-military-pointing",
-      "title": "SEGURIDAD FISICA",
+      "title": "SEGURIDAD FÍSICA",
       "description": "Protección personal ejecutiva con personal altamente entrenado. Servicio especializado en seguridad física para directivos, empresarios y personas que requieren acompañamiento profesional en desplazamientos y eventos."
     },
     {
       "id": "6",
       "iconBg": "fa-solid fa-circle",
       "icon": "fa-solid fa-fingerprint",
-      "title": "BIOMETRICOS",
+      "title": "BIOMÉTRICOS",
       "description": "Control de acceso inteligente mediante reconocimiento de huellas digitales y rasgos faciales. Tecnología avanzada que elimina tarjetas y códigos, garantizando identificación precisa e inviolable en sus instalaciones."
     }
   ],
@@ -151,32 +157,32 @@
     {
       "id": "1",
       "imageUrl": "images/image-card-1-gallery.webp",
-      "alt": "Imagen card-gallery 1"
+      "alt": "Guarda de seguridad Delfos en servicio"
     },
     {
       "id": "2",
       "imageUrl": "images/image-card-2-gallery.webp",
-      "alt": "Imagen card-gallery 2"
+      "alt": "Personal de vigilancia privada Delfos"
     },
     {
       "id": "3",
       "imageUrl": "images/image-card-3-gallery.webp",
-      "alt": "Imagen card-gallery 3"
+      "alt": "Monitoreo de cámaras de seguridad CCTV"
     },
     {
       "id": "4",
       "imageUrl": "images/image-card-4-gallery.webp",
-      "alt": "Imagen card-gallery 4"
+      "alt": "Equipo de seguridad privada en Bogotá"
     },
     {
       "id": "5",
       "imageUrl": "images/image-card-5-gallery.webp",
-      "alt": "Imagen card-gallery 5"
+      "alt": "Control de acceso y vigilancia"
     },
     {
       "id": "6",
       "imageUrl": "images/image-card-6-gallery.webp",
-      "alt": "Imagen card-gallery 6"
+      "alt": "Supervisión de seguridad Delfos Ltda"
     }
   ],
   "testimonialsTitle": "Lo que dicen",
@@ -184,23 +190,23 @@
   "testimonials": [
     {
       "id": "1",
-      "text": "\"Desde que contratamos a Seguridad Delfos Ltda, nuestra tranquilidad ha sido total. Su profesionalismo y protocolo de seguridad son impecables, protegiendo nuestras instalaciones tecnológicas las 24 horas. Sin duda, la mejor inversión para proteger nuestros activos.\"",
-      "authorName": "Sara Martinez",
-      "authorRole": "CEO | GlobalTech Solutions",
+      "text": "Desde que Seguridad Delfos llegó al conjunto, los residentes se sienten mucho más tranquilos. Los guardas son atentos y respetuosos, y con RondaKey el consejo de administración puede verificar que las rondas se cumplan. Es un servicio serio y muy bien supervisado.",
+      "authorName": "Carolina Restrepo Gómez",
+      "authorRole": "Administradora · Conjunto residencial en Usaquén, Bogotá",
       "authorImage": "images/client-image1.webp"
     },
     {
       "id": "2",
-      "text": "\"Seguridad Delfos Ltda ha transformado completamente nuestra seguridad en Pacific Trade & Logistics. Su sistema de vigilancia es excepcional y se adaptan perfectamente a nuestros horarios irregulares. Recomiendo Seguridad Delfos sin reservas.\"",
-      "authorName": "Li Wei Chen",
-      "authorRole": "CEO | Pacific Trade & Logistics",
+      "text": "Manejamos turnos las 24 horas y necesitábamos un aliado que se adaptara a nuestra operación. Delfos nos dio control de acceso vehicular, monitoreo de cámaras y reacción inmediata ante cualquier novedad. La comunicación con la central es permanente y eso hace la diferencia.",
+      "authorName": "Andrés Felipe Morales",
+      "authorRole": "Gerente de operaciones · Centro logístico en Funza, Cundinamarca",
       "authorImage": "images/client-image2.webp"
     },
     {
       "id": "3",
-      "text": "\"En Luxe Boutique Hotels, la seguridad y discreción son fundamentales. Seguridad Delfos Ltda ha superado todas nuestras expectativas con sistemas invisibles pero efectivos. Gracias a Delfos, nuestros huéspedes VIP se sienten completamente seguros.\"",
-      "authorName": "Andrea Smith",
-      "authorRole": "CEO & Founder | Luxe Boutique Hotels",
+      "text": "En un hotel la seguridad tiene que ser discreta pero efectiva. El personal de Delfos entiende perfectamente nuestro servicio, trata con amabilidad a los huéspedes y siempre está alerta. Llevamos varios años trabajando juntos y la confianza es total.",
+      "authorName": "Luz Marina Cárdenas",
+      "authorRole": "Directora administrativa · Hotel boutique en Chapinero, Bogotá",
       "authorImage": "images/client-image3.webp"
     }
   ],
@@ -210,24 +216,29 @@
     {
       "id": "1",
       "imageUrl": "images/image-news-card-1.webp",
-      "title": "Sistema de seguridad de edificios",
-      "linkUrl": "#",
-      "description": "Delfos ofrece seguridad de primer nivel para cualquier tipo de edificio gracias a su equipamiento de alta tecnología y al estricto cumplimiento de los protocolos. Como puedes ver, esta tarjeta no redirige a El Tiempo, sino que muestra nuestro texto personalizado.",
-      "iframeUrl": "https://www.eltiempo.com/tecnosfera/apps/como-proteger-sus-datos-personales-en-internet-3324089"
+      "title": "Gobierno Nacional fortalece el control sobre armas a empresas de vigilancia y seguridad privada",
+      "source": "Supervigilancia · julio de 2025",
+      "description": "El Ministerio de Defensa, la Supervigilancia y el Departamento de Control, Comercio de Armas y Explosivos implementaron un protocolo conjunto para reforzar la inspección del armamento autorizado a las empresas del sector y evitar su uso indebido.",
+      "linkUrl": "https://www.supervigilancia.gov.co/blog/name-2/gobierno-nacional-fortalece-el-control-sobre-armas-a-empresas-de-vigilancia-y-seguridad-privada-12",
+      "iframeUrl": "https://www.supervigilancia.gov.co/blog/name-2/gobierno-nacional-fortalece-el-control-sobre-armas-a-empresas-de-vigilancia-y-seguridad-privada-12"
     },
     {
       "id": "2",
       "imageUrl": "images/image-news-card-2.webp",
-      "title": "No te preocupes, tus datos están a salvo",
-      "linkUrl": "#",
-      "iframeUrl": "https://www.eltiempo.com/tecnosfera/apps/como-proteger-sus-datos-personales-en-internet-3324089"
+      "title": "Supervigilancia suspende licencias a cinco empresas de seguridad privada por presuntos incumplimientos de ley",
+      "source": "Supervigilancia · junio de 2025",
+      "description": "La Superintendencia suspendió la licencia de operación de cinco empresas de vigilancia por presuntos incumplimientos graves de la normatividad. Un recordatorio de la importancia de contratar empresas legalmente habilitadas y vigiladas.",
+      "linkUrl": "https://www.supervigilancia.gov.co/blog/name-2/superintendencia-de-vigilancia-y-seguridad-privada-suspende-licencias-a-cinco-empresas-de-seguridad-privada-por-presuntos-incumplimientos-de-ley-13",
+      "iframeUrl": "https://www.supervigilancia.gov.co/blog/name-2/superintendencia-de-vigilancia-y-seguridad-privada-suspende-licencias-a-cinco-empresas-de-seguridad-privada-por-presuntos-incumplimientos-de-ley-13"
     },
     {
       "id": "3",
       "imageUrl": "images/image-news-card-3.webp",
-      "title": "Sigue adelante, siempre estaremos contigo",
-      "linkUrl": "#",
-      "iframeUrl": "https://www.eltiempo.com/colombia/otras-ciudades/inseguridad-en-colombia-estas-son-las-ciudades-mas-peligrosas-del-pais-segun-encuesta-del-dane-3315628"
+      "title": "Supervigilancia y Mintrabajo trazan hoja de ruta para mejorar las condiciones laborales del sector",
+      "source": "Supervigilancia · marzo de 2025",
+      "description": "La Superintendencia de Vigilancia y el Ministerio del Trabajo acordaron una hoja de ruta para mejorar las condiciones laborales de los más de 350.000 trabajadores de la vigilancia y la seguridad privada en Colombia.",
+      "linkUrl": "https://www.supervigilancia.gov.co/blog/name-2/supervigilancia-y-mintrabajo-continuan-trazando-hoja-de-ruta-en-pro-de-la-mejora-de-las-condiciones-laborales-en-el-sector-de-la-vigilancia-y-seguridad-privada-7",
+      "iframeUrl": "https://www.supervigilancia.gov.co/blog/name-2/supervigilancia-y-mintrabajo-continuan-trazando-hoja-de-ruta-en-pro-de-la-mejora-de-las-condiciones-laborales-en-el-sector-de-la-vigilancia-y-seguridad-privada-7"
     }
   ],
   "preFooter": {
@@ -236,7 +247,7 @@
     "pdfButtonText": "DESCARGAR.PDF"
   },
   "contactNumber": "(+57) 319 450 5775",
-  "utilsTitle": "Utils",
+  "utilsTitle": "Utilidades",
   "utilsLinks": [
     {
       "id": "1",
@@ -262,7 +273,7 @@
       "id": "1",
       "text": "Inicio",
       "type": "route",
-      "target": "/home"
+      "target": "/"
     },
     {
       "id": "2",
@@ -284,7 +295,7 @@
     },
     {
       "id": "5",
-      "text": "Galeria",
+      "text": "Galería",
       "type": "internal",
       "target": "#section-gallery"
     },
@@ -297,7 +308,7 @@
   ],
   "footerAbout": {
     "title": "Delfos Ltda",
-    "description": "\"Seguridad Delfos Ltda: más de 20 años brindando soluciones integrales de seguridad con cobertura nacional. Comprometidos con nuestros clientes y el bienestar de nuestro talento humano.\""
+    "description": "Seguridad Delfos Ltda: más de 25 años brindando soluciones integrales de seguridad privada con cobertura nacional. Comprometidos con nuestros clientes y con el bienestar de nuestro talento humano."
   },
   "footerMainLinks": [
     {
@@ -308,33 +319,51 @@
     },
     {
       "id": "2",
-      "text": "Delivery Information",
-      "type": "route",
-      "target": "/delivery"
+      "text": "Servicios",
+      "type": "internal",
+      "target": "#section-services"
     },
     {
       "id": "3",
-      "text": "Terms & Condition",
-      "type": "route",
-      "target": "/terms"
+      "text": "Galería",
+      "type": "internal",
+      "target": "#section-gallery"
     },
     {
       "id": "4",
-      "text": "Privacy Policy",
-      "type": "route",
-      "target": "/privacy"
+      "text": "Testimonios",
+      "type": "internal",
+      "target": "#section-testimonials"
     },
     {
       "id": "5",
-      "text": "Contacto",
+      "text": "Noticias",
       "type": "internal",
-      "target": "#section-contact"
+      "target": "#section-news"
+    },
+    {
+      "id": "7",
+      "text": "PQRS",
+      "type": "internal",
+      "target": "#section-pqrs"
     },
     {
       "id": "6",
-      "text": "Return Policy",
-      "type": "route",
-      "target": "/returns"
+      "text": "Contacto",
+      "type": "internal",
+      "target": "#section-contact"
     }
-  ]
+  ],
+  "socialLinks": {
+    "instagram": "https://www.instagram.com/seguridaddelfos",
+    "facebook": "",
+    "tiktok": "",
+    "linkedin": ""
+  },
+  "pqrs": {
+    "title": "PQRS · Peticiones, quejas, reclamos y sugerencias",
+    "text": "¿Tienes una petición, queja, reclamo, sugerencia o denuncia? Escríbenos: la respondemos dentro de los términos de ley.",
+    "email": "delfos.comercial@hotmail.com",
+    "buttonText": "Radicar PQRS"
+  }
 }

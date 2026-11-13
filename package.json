@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "dev": "concurrently \"node server.js\" \"ng serve\"",
+    "dev": "concurrently -n api,web \"node server.js\" \"ng serve\"",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",

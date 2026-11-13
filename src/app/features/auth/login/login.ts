@@ -1,219 +1,96 @@
 import { Component, inject, signal } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
-import { AuthService } from '../../../core/services/auth.service';
+import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../../core/services/auth.service';
+import { Icon } from '../../../shared/components/icon/icon';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule, RouterLink, Icon],
   template: `
-    <div class="login-container">
-      <div class="login-wrapper">
-        <div class="login-box">
-          <h2>Delfos Security</h2>
-          <p class="subtitle">Acceso Autorizado</p>
+    <div class="login grid-bg">
+      <div class="login__card">
+        <div class="login__form">
+          <img src="images/logo-shield.webp" alt="Escudo Seguridad Delfos Ltda" width="64" height="58" class="login__logo">
+          <h1>Delfos Seguridad</h1>
+          <p class="login__sub">Acceso autorizado</p>
+
           <form (ngSubmit)="login()">
-            <div class="form-group">
-              <label>Contraseña de Sistema</label>
-              <input type="password" [(ngModel)]="password" name="password" placeholder="••••••••" required>
+            <div class="field">
+              <label for="pwd">Contraseña del sistema</label>
+              <input id="pwd" class="input" type="password" [(ngModel)]="password" name="password" placeholder="••••••••"
+                autocomplete="current-password" required>
             </div>
-            <button type="submit" class="btn-primary">Verificar Identidad</button>
-            
+            <button type="submit" class="btn btn--primary btn--block">Verificar identidad</button>
+
             @if (error()) {
-              <div class="error-badge">
-                <i class="fa-solid fa-triangle-exclamation"></i> {{ error() }}
-              </div>
+              <p class="login__error"><app-icon name="alert" [size]="18" /> {{ error() }}</p>
             }
           </form>
-          <a routerLink="/" class="back-home"><i class="fa-solid fa-arrow-left"></i> Volver a Navegación</a>
+
+          <a routerLink="/" class="login__back"><app-icon name="arrow-left" [size]="16" /> Volver al sitio</a>
         </div>
-        <div class="login-decoration">
-          <!-- Textura o información secundaria -->
-          <i class="fa-solid fa-shield-halved huge-icon"></i>
-          <h3>Panel Administrativo</h3>
-          <p>Plataforma exclusiva para gestión de contenidos y configuración del portal Delfos Ltda.</p>
-        </div>
+
+        <aside class="login__side">
+          <span class="login__shield"><app-icon name="shield-check" [size]="72" [stroke]="1.2" /></span>
+          <h2>Panel administrativo</h2>
+          <p>Plataforma exclusiva para la gestión de contenidos y configuración del portal de Delfos Ltda.</p>
+        </aside>
       </div>
     </div>
   `,
   styles: `
-    .login-container { 
-      display: flex; 
-      justify-content: center; 
-      align-items: center; 
-      min-height: 100vh; 
-      /* Utilizamos el Background image del parallax del home como textura oscura de fondo */
-      background: linear-gradient(rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.95)), url('/images/tu-imagen-ciudad-noche.webp');
-      background-size: cover;
-      background-position: center;
-      padding: 2rem;
+    .login {
+      position: relative;
+      min-height: 100vh; min-height: 100dvh;
+      display: grid; place-items: center;
+      padding: 16px;
+      background:
+        linear-gradient(rgba(5,7,15,.86), rgba(5,7,15,.94)),
+        url('/images/tu-imagen-ciudad-noche.webp') center / cover;
     }
-    
-    .login-wrapper {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      max-width: 900px;
-      background: var(--Background-Dark, #141414);
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-      border: 1px solid rgba(255,255,255,0.05);
+    .login__card {
+      position: relative;
+      display: grid; grid-template-columns: 1fr;
+      width: 100%; max-width: 880px;
+      border-radius: 20px; overflow: hidden;
+      background: rgba(12,16,34,.92);
+      border: 1px solid rgba(242,103,35,.4);
+      box-shadow: 0 0 50px rgba(242,103,35,.15), var(--shadow);
     }
-    
-    @media (min-width: 768px) {
-      .login-wrapper {
-        flex-direction: row;
-        min-height: 500px;
-      }
+    @media (min-width: 768px) { .login__card { grid-template-columns: 1.1fr 1fr; } }
+    .login__form { padding: clamp(28px, 5vw, 52px); }
+    .login__logo { width: 64px; height: auto; margin-bottom: 16px; filter: drop-shadow(0 0 12px rgba(244,181,39,.45)); }
+    h1 { font-size: 3.4rem; text-transform: uppercase; letter-spacing: .04em; }
+    .login__sub { font-family: var(--font-display); text-transform: uppercase; letter-spacing: .3em; font-size: 1.4rem; color: var(--orange-neon); margin: 6px 0 32px; }
+    form { display: grid; gap: 20px; }
+    .login__error { display: flex; gap: 10px; align-items: center; padding: 12px; border-radius: 10px; border: 1px solid rgba(209,36,32,.6); background: rgba(209,36,32,.1); color: #ffb4b2; font-size: 1.45rem; }
+    .login__back { display: inline-flex; align-items: center; gap: 8px; margin-top: 28px; color: var(--muted); font-size: 1.45rem; transition: color .2s; }
+    .login__back:hover { color: #fff; }
+    .login__side {
+      display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+      padding: 48px; gap: 14px;
+      background: radial-gradient(circle at 50% 30%, rgba(242,103,35,.18), transparent 60%), linear-gradient(160deg, #0b1022, #05070f);
+      border-left: 1px solid var(--border);
     }
-    
-    .login-box { 
-      flex: 1;
-      padding: 5rem 4rem; 
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    
-    .login-decoration {
-      flex: 1;
-      background: linear-gradient(135deg, var(--Charleston-Green, #1f1f1f) 0%, #0a0a0a 100%);
-      padding: 5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      border-left: 1px solid rgba(255,255,255,0.05);
-      display: none; /* Oculto en móbiles */
-    }
-    
-    @media (min-width: 768px) {
-      .login-decoration {
-        display: flex;
-      }
-    }
-    
-    .huge-icon {
-      font-size: 8rem;
-      color: var(--Halloween-Orange, #F26723);
-      margin-bottom: 2rem;
-      opacity: 0.8;
-    }
-    
-    .login-decoration p {
-      color: var(--Dim-Gray, #8b8b8b);
-      font-size: 1.6rem;
-      max-width: 300px;
-      line-height: 1.6;
-    }
-    
-    h2 { 
-      font-family: 'Oswald', sans-serif; 
-      color: var(--Lotion, #fff); 
-      font-size: 4rem;
-      margin: 0 0 0.5rem 0; 
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    
-    .subtitle {
-      color: var(--Halloween-Orange, #F26723);
-      font-family: 'Oswald', sans-serif;
-      font-size: 1.8rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-top: 0;
-      margin-bottom: 4rem;
-    }
-    
-    .form-group { 
-      margin-bottom: 2.5rem; 
-      text-align: left; 
-    }
-    
-    .form-group label { 
-      display: block; 
-      margin-bottom: 1rem; 
-      font-weight: 500; 
-      color: var(--Dim-Gray, #8b8b8b); 
-      font-size: 1.4rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    
-    .form-group input { 
-      width: 100%; 
-      padding: 1.6rem; 
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.1); 
-      color: white;
-      border-radius: 8px; 
-      box-sizing: border-box; 
-      font-size: 1.8rem; /* Mayor accesibilidad */
-      font-family: 'Roboto', sans-serif;
-      transition: all 0.3s ease;
-    }
-    
-    .form-group input:focus { 
-      border-color: var(--Halloween-Orange, #F26723); 
-      background: rgba(242, 103, 35, 0.05); /* Toque anaranjado muy sutil */
-      outline: none; 
-      box-shadow: 0 0 0 4px rgba(242, 103, 35, 0.1);
-    }
-    
-    .btn-primary { 
-      width: 100%; 
-      padding: 1.6rem; 
-      font-size: 1.8rem;
-      margin-top: 1rem;
-    }
-    
-    .error-badge { 
-      background: rgba(209, 36, 32, 0.1); /* Maximun Red con alpha */
-      border: 1px solid var(--Maximun-Red, #D12420);
-      color: #ff6b6b; 
-      padding: 1.2rem;
-      border-radius: 6px;
-      margin-top: 2rem; 
-      font-size: 1.4rem; 
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-    
-    .back-home { 
-      display: inline-flex; 
-      align-items: center;
-      gap: 0.8rem;
-      margin-top: 3.5rem; 
-      text-decoration: none; 
-      color: var(--Dim-Gray, #8b8b8b); 
-      font-weight: 500; 
-      font-size: 1.5rem; 
-      transition: color 0.3s; 
-    }
-    
-    .back-home:hover { 
-      color: var(--Lotion, #fff); 
-    }
+    @media (min-width: 768px) { .login__side { display: flex; } }
+    .login__shield { color: var(--orange-neon); filter: drop-shadow(0 0 16px rgba(242,103,35,.7)); }
+    .login__side h2 { font-size: 2.4rem; text-transform: uppercase; letter-spacing: .06em; }
+    .login__side p { color: var(--muted); font-size: 1.5rem; max-width: 300px; }
   `
 })
 export class LoginComponent {
-  authService = inject(AuthService);
-  router = inject(Router);
+  private authService = inject(AuthService);
 
   password = '';
   error = signal('');
 
   login() {
     if (this.authService.login(this.password)) {
-      // Usamos window.location.href en lugar de router.navigate para forzar
-      // una recarga de la página y que la petición pase por Cloudflare Access
+      // Recarga completa para que la petición pase por Cloudflare Access
       window.location.href = '/admin';
     } else {
-      this.error.set('Contraseña muy corta');
+      this.error.set('La contraseña es demasiado corta');
     }
   }
 }

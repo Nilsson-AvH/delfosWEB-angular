@@ -19,6 +19,7 @@ const routes: Routes = [
       { path: 'gallery', loadComponent: () => import('./pages/gallery-admin/gallery-admin').then(m => m.GalleryAdmin) },
       { path: 'testimonials', loadComponent: () => import('./pages/testimonials-admin/testimonials-admin').then(m => m.TestimonialsAdmin) },
       { path: 'news', loadComponent: () => import('./pages/news-admin/news-admin').then(m => m.NewsAdmin) },
+      { path: 'pqrs', loadComponent: () => import('./pages/pqrs-admin/pqrs-admin').then(m => m.PqrsAdmin) },
       { path: 'pre-footer', loadComponent: () => import('./pages/pre-footer-admin/pre-footer-admin').then(m => m.PreFooterAdmin) },
       { path: 'footer', loadComponent: () => import('./pages/footer-admin/footer-admin').then(m => m.FooterAdmin) }
     ]

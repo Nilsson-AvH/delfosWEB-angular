@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { RouterOutlet, Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs/operators';
 import { Header } from './shared/layout/header/header';
 import { Footer } from './shared/layout/footer/footer';
 import { SeoService } from './core/services/seo.service';
-import { Meta } from '@angular/platform-browser';
+
+const SITE_URL = 'https://seguridaddelfos.com';
 
 @Component({
   selector: 'app-root',
@@ -13,46 +14,35 @@ import { Meta } from '@angular/platform-browser';
   styleUrl: './app.scss'
 })
 export class App implements OnInit {
-  constructor(
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private seoService: SeoService,
-    private metaService: Meta
-  ) {}
+  private router = inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
+  private seo = inject(SeoService);
+
+  /** El header/footer público no se muestran en el panel ni en el login. */
+  isPublic = signal(!this.isPrivateUrl(location.pathname));
+
+  private isPrivateUrl(url: string) {
+    return url.startsWith('/admin') || url.startsWith('/login');
+  }
 
   ngOnInit() {
     this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd),
-      map(() => this.activatedRoute),
-      map(route => {
-        while (route.firstChild) {
-          route = route.firstChild;
-        }
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+      map(event => {
+        this.isPublic.set(!this.isPrivateUrl(event.urlAfterRedirects));
+        let route = this.activatedRoute;
+        while (route.firstChild) route = route.firstChild;
         return route;
       }),
       filter(route => route.outlet === 'primary'),
       mergeMap(route => route.data)
     ).subscribe(data => {
-      // Título
-      if (data['title']) {
-        this.seoService.updateTitle(data['title']);
-      }
-      
-      // Descripción
-      if (data['description']) {
-        this.seoService.updateDescription(data['description']);
-      }
+      if (data['title']) this.seo.updateTitle(data['title']);
+      if (data['description']) this.seo.updateDescription(data['description']);
+      this.seo.setRobots(data['robots'] || 'index, follow, max-image-preview:large');
 
-      // Robots
-      if (data['robots']) {
-        this.metaService.updateTag({ name: 'robots', content: data['robots'] });
-      } else {
-        this.metaService.updateTag({ name: 'robots', content: 'index, follow' });
-      }
-
-      // Canonical
-      const url = `https://www.seguridaddelfos.com${this.router.url}`;
-      this.seoService.updateCanonicalUrl(url);
+      const path = this.router.url.split(/[?#]/)[0];
+      this.seo.updateCanonicalUrl(`${SITE_URL}${path === '/' ? '/' : path}`);
     });
   }
 }

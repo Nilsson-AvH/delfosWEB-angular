@@ -1,9 +1,12 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, HostListener, inject, signal } from '@angular/core';
 import { ContentService } from '../../../../../core/services/content.service';
+import { Icon } from '../../../../../shared/components/icon/icon';
+import { Modal } from '../../../../../shared/components/modal/modal';
+import { Reveal } from '../../../../../shared/directives/reveal';
 
 @Component({
   selector: 'app-gallery',
-  imports: [],
+  imports: [Icon, Modal, Reveal],
   templateUrl: './gallery.html',
   styleUrl: './gallery.scss',
 })
@@ -13,36 +16,21 @@ export class Gallery {
   subtitle = this.contentService.gallerySubtitle;
   items = this.contentService.galleryItems;
 
-  // Manejo del Lightbox (Visor de Imágenes)
   activeImageIndex = signal<number | null>(null);
 
-  openLightbox(index: number, event: Event) {
-    event.preventDefault(); // Evita el ancla/hasheo
-    this.activeImageIndex.set(index);
+  openLightbox(index: number) { this.activeImageIndex.set(index); }
+  closeLightbox() { this.activeImageIndex.set(null); }
+
+  prevImage() {
+    const i = this.activeImageIndex();
+    if (i !== null) this.activeImageIndex.set((i - 1 + this.items().length) % this.items().length);
   }
 
-  closeLightbox(event?: Event) {
-    if (event) event.preventDefault();
-    this.activeImageIndex.set(null);
+  nextImage() {
+    const i = this.activeImageIndex();
+    if (i !== null) this.activeImageIndex.set((i + 1) % this.items().length);
   }
 
-  prevImage(event: Event) {
-    event.preventDefault();
-    const currentIndex = this.activeImageIndex();
-    if (currentIndex !== null) {
-      const itemsCount = this.items().length;
-      const newIndex = currentIndex === 0 ? itemsCount - 1 : currentIndex - 1;
-      this.activeImageIndex.set(newIndex);
-    }
-  }
-
-  nextImage(event: Event) {
-    event.preventDefault();
-    const currentIndex = this.activeImageIndex();
-    if (currentIndex !== null) {
-      const itemsCount = this.items().length;
-      const newIndex = currentIndex === itemsCount - 1 ? 0 : currentIndex + 1;
-      this.activeImageIndex.set(newIndex);
-    }
-  }
+  @HostListener('document:keydown.arrowleft') onLeft() { if (this.activeImageIndex() !== null) this.prevImage(); }
+  @HostListener('document:keydown.arrowright') onRight() { if (this.activeImageIndex() !== null) this.nextImage(); }
 }

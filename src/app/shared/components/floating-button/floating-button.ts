@@ -1,22 +1,22 @@
-import { Component, inject } from '@angular/core';
+import { Component, HostListener, computed, inject, signal } from '@angular/core';
 import { ContentService } from '../../../core/services/content.service';
-import { CommonModule } from '@angular/common';
-import { ViewportScroller } from '@angular/common';
+import { Icon } from '../icon/icon';
 
 @Component({
   selector: 'app-floating-button',
-  imports: [CommonModule],
+  imports: [Icon],
   templateUrl: './floating-button.html',
   styleUrl: './floating-button.scss'
 })
 export class FloatingButton {
-  contentService = inject(ContentService);
-  scroller = inject(ViewportScroller);
-  contactNumber = this.contentService.contactNumber;
+  private contentService = inject(ContentService);
+  cleanPhone = computed(() => this.contentService.contactNumber().replace(/\D/g, ''));
+  showTop = signal(false);
 
-  // Extraemos solo digitos del numero de contacto para armar el link de WhatsApp
-  get cleanPhone() {
-    return this.contactNumber().replace(/\D/g, '');
+  @HostListener('window:scroll')
+  onScroll() {
+    const show = window.scrollY > 600;
+    if (show !== this.showTop()) this.showTop.set(show);
   }
 
   scrollToTop() {

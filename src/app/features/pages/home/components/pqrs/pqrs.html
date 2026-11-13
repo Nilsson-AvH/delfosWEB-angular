@@ -1,0 +1,124 @@
+<section class="cta cta--pqrs" id="section-pqrs" aria-labelledby="pqrs-title">
+  <div class="container">
+    <div class="cta__box" appReveal>
+      <span class="cta__icon"><app-icon name="message" [size]="34" [stroke]="1.5" /></span>
+      <div class="cta__text">
+        <h2 id="pqrs-title">{{ content().title }}</h2>
+        <p class="muted">{{ content().text }}</p>
+      </div>
+      <button type="button" class="btn btn--primary" (click)="open()">
+        <app-icon name="send" [size]="18" /> {{ content().buttonText }}
+      </button>
+    </div>
+  </div>
+</section>
+
+@if (isOpen()) {
+<app-modal size="wide" label="Radicar PQRS" (closed)="close()">
+  @if (!ready()) {
+  <form class="pqrs" (submit)="submit($event)" novalidate>
+    <p class="eyebrow">Atención al ciudadano</p>
+    <h3 class="modal__title">Radicar PQRS</h3>
+    <p class="pqrs__intro">Recibimos peticiones, quejas, reclamos, sugerencias, denuncias y felicitaciones de personas naturales y jurídicas.
+      Daremos respuesta dentro de los términos de la Ley 1755 de 2015 (por regla general, 15 días hábiles).</p>
+
+    <div class="pqrs__grid">
+      <label class="field">
+        <span>Tipo de solicitud *</span>
+        <select class="input" [value]="form.type" (change)="set('type', $event)">
+          @for (t of types; track t) { <option [value]="t">{{ t }}</option> }
+        </select>
+      </label>
+      <label class="field">
+        <span>Tipo de persona *</span>
+        <select class="input" [value]="form.personType" (change)="set('personType', $event)">
+          <option value="Natural">Persona natural</option>
+          <option value="Jurídica">Persona jurídica</option>
+        </select>
+      </label>
+
+      <label class="field pqrs__span">
+        <span>{{ form.personType === 'Jurídica' ? 'Razón social' : 'Nombre completo' }} *</span>
+        <input class="input" [value]="form.name" (input)="set('name', $event)" maxlength="120" autocomplete="name" [class.is-invalid]="err('name')">
+      </label>
+
+      <label class="field">
+        <span>Tipo de documento *</span>
+        <select class="input" [value]="form.docType" (change)="set('docType', $event)">
+          @for (d of docTypes; track d) { <option [value]="d">{{ d }}</option> }
+        </select>
+      </label>
+      <label class="field">
+        <span>Número de documento *</span>
+        <input class="input" [value]="form.docNumber" (input)="set('docNumber', $event)" maxlength="20" inputmode="numeric" [class.is-invalid]="err('docNumber')">
+      </label>
+
+      <label class="field">
+        <span>Correo electrónico (para la respuesta) *</span>
+        <input class="input" type="email" [value]="form.email" (input)="set('email', $event)" maxlength="120" autocomplete="email" [class.is-invalid]="err('email')">
+      </label>
+      <label class="field">
+        <span>Teléfono</span>
+        <input class="input" type="tel" [value]="form.phone" (input)="set('phone', $event)" maxlength="20" autocomplete="tel">
+      </label>
+
+      <label class="field pqrs__span">
+        <span>Asunto *</span>
+        <input class="input" [value]="form.subject" (input)="set('subject', $event)" maxlength="100" [class.is-invalid]="err('subject')"
+          placeholder="Ej.: Solicitud de cotización para conjunto residencial">
+      </label>
+      <label class="field pqrs__span">
+        <span>Descripción *</span>
+        <textarea class="input" rows="5" [value]="form.message" (input)="set('message', $event)" maxlength="1500" [class.is-invalid]="err('message')"
+          placeholder="Describe tu solicitud con el mayor detalle posible (fechas, lugar, personas involucradas…)"></textarea>
+        <small>{{ form.message.length }}/1500</small>
+      </label>
+
+      <label class="pqrs__check pqrs__span" [class.is-invalid]="err('consent')">
+        <input type="checkbox" [checked]="form.consent" (change)="setCheck($event)">
+        <span>Autorizo a Seguridad Delfos Ltda a tratar mis datos personales únicamente para gestionar y responder esta solicitud,
+          conforme a la Ley 1581 de 2012 de protección de datos personales. *</span>
+      </label>
+    </div>
+
+    @if (showErrors() && !valid()) {
+    <p class="pqrs__error"><app-icon name="alert" [size]="16" /> Revisa los campos marcados: son obligatorios o tienen un formato no válido.</p>
+    }
+
+    <div class="modal__actions pqrs__actions">
+      <button type="button" class="btn btn--soft" (click)="close()">Cancelar</button>
+      <button type="submit" class="btn btn--primary"><app-icon name="arrow-right" [size]="16" /> Continuar</button>
+    </div>
+  </form>
+  } @else {
+  <div class="pqrs">
+    <p class="eyebrow">Radicado {{ radicado() }}</p>
+    <h3 class="modal__title">Envía tu PQRS</h3>
+    <p class="pqrs__intro">Tu solicitud está lista. Elige con qué correo enviarla a <strong>{{ content().email }}</strong>.
+      Se abrirá con el asunto y el contenido ya diligenciados; solo debes pulsar <em>Enviar</em>.</p>
+
+    <div class="pqrs__send">
+      <a class="btn btn--primary" [href]="mailtoUrl()" (click)="sent.set(true)"><app-icon name="mail" [size]="18" /> Mi aplicación de correo</a>
+      <a class="btn btn--ghost" [href]="gmailUrl()" target="_blank" rel="noopener" (click)="sent.set(true)">Gmail</a>
+      <a class="btn btn--ghost" [href]="outlookUrl()" target="_blank" rel="noopener" (click)="sent.set(true)">Outlook / Hotmail</a>
+      <button type="button" class="btn btn--soft" (click)="copy()"><app-icon name="copy" [size]="16" /> {{ copied() ? 'Copiado' : 'Copiar texto' }}</button>
+    </div>
+
+    <details class="pqrs__preview">
+      <summary>Ver el mensaje</summary>
+      <p><strong>Asunto:</strong> {{ mailSubject() }}</p>
+      <pre>{{ mailBody() }}</pre>
+    </details>
+
+    @if (sent()) {
+    <p class="pqrs__ok"><app-icon name="check" [size]="16" /> Cuando envíes el correo recibirás la respuesta en {{ form.email }}. Guarda tu número de radicado: {{ radicado() }}.</p>
+    }
+
+    <div class="modal__actions pqrs__actions">
+      <button type="button" class="btn btn--soft" (click)="ready.set(false)"><app-icon name="arrow-left" [size]="16" /> Editar</button>
+      <button type="button" class="btn btn--primary" (click)="close()">Finalizar</button>
+    </div>
+  </div>
+  }
+</app-modal>
+}

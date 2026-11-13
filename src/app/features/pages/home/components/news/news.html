@@ -1,43 +1,53 @@
-<section id="section-news" class="section section-news-various news-various">
-    <div class="container">
-        <h2>{{ title() }}</h2>
-        <h3>{{ subtitle() }}</h3>
-        <div class="news-various-cards">
-            @for (item of items(); track item.id; let i = $index) {
-            <div class="news news-card-{{ i + 1 }} hover-effect-global" (click)="openModal(i, $event)"
-                style="cursor: pointer;">
-                <img [src]="item.imageUrl" [alt]="item.title" loading="lazy">
-                <a [href]="item.linkUrl" (click)="$event.preventDefault()">{{ item.title }}</a>
-            </div>
-            }
+<section id="section-news" class="section grid-bg news">
+  <div class="container">
+    <header class="section-head" appReveal>
+      <p class="eyebrow">{{ subtitle() }}</p>
+      <h2 class="section-title">{{ title() }}</h2>
+    </header>
+
+    <div class="news__grid">
+      @for (item of items(); track item.id; let i = $index) {
+      <article class="news-card card-glass card-glass--hover" (click)="openModal(i)" appReveal [revealDelay]="i * 90">
+        <div class="news-card__img">
+          <img [src]="item.imageUrl" [alt]="item.title" loading="lazy" decoding="async" width="480" height="300">
         </div>
-
-        <!-- Renderizado del Lightbox Modal Condicional Iframe -->
-        @if (activeNewsIndex() !== null) {
-        <figure class="lightbox-modal">
-            <div class="modal-card">
-                <div class="modal-card-body"
-                    style="padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1;">
-                    <h3 style="margin-bottom: 1rem; font-size: 2rem;">{{ items()[activeNewsIndex()!].title }}</h3>
-
-                    @if (items()[activeNewsIndex()!].iframeUrl) {
-                    <iframe class="modal-iframe-container" [src]="items()[activeNewsIndex()!].iframeUrl | safeUrl"
-                        title="News Component Origin" allowfullscreen></iframe>
-                    } @else if (items()[activeNewsIndex()!].description) {
-                    <div style="padding: 1rem 0; overflow-y: auto; max-height: 60vh;">
-                        <img [src]="items()[activeNewsIndex()!].imageUrl" [alt]="items()[activeNewsIndex()!].title" style="max-width: 100%; border-radius: 8px; margin-bottom: 2rem;">
-                        <p style="white-space: pre-wrap; font-size: 1.6rem; color: #fff;">{{ items()[activeNewsIndex()!].description }}</p>
-                    </div>
-                    } @else {
-                    <p style="text-align: center; padding: 3rem;">No se proporcionó una URL o descripción válida para esta noticia.
-                    </p>
-                    }
-                </div>
-            </div>
-
-            <a class="close" href="#" (click)="closeModal($event)" aria-label="Cerrar"></a>
-        </figure>
-        }
-
+        <div class="news-card__body">
+          @if (item.source) { <span class="news-card__source">{{ item.source }}</span> }
+          <h3>{{ item.title }}</h3>
+          @if (item.description) { <p>{{ item.description }}</p> }
+          <button type="button" class="news-card__more">Leer noticia <app-icon name="arrow-right" [size]="16" /></button>
+        </div>
+      </article>
+      }
     </div>
+  </div>
 </section>
+
+@if (activeItem(); as item) {
+<app-modal [label]="item.title" [size]="item.iframeUrl ? 'wide' : 'default'" (closed)="closeModal()">
+  @if (!item.iframeUrl) {
+  <div class="modal__media"><img [src]="item.imageUrl" [alt]="item.title" loading="lazy"></div>
+  }
+  <div class="modal__body">
+    <p class="eyebrow">{{ item.source || 'Noticias' }}</p>
+    <h3 class="modal__title">{{ item.title }}</h3>
+    @if (item.description) {
+    <p class="modal__text">{{ item.description }}</p>
+    }
+    @if (item.iframeUrl) {
+    <div class="news__frame-wrap" [class.is-loaded]="frameLoaded()">
+      <p class="news__loading"><span class="news__spinner"></span> Cargando la noticia desde la fuente oficial…</p>
+      <iframe class="news__frame" [src]="item.iframeUrl | safeUrl" [title]="item.title" (load)="frameLoaded.set(true)"></iframe>
+    </div>
+    <div class="modal__actions">
+      <a class="btn btn--ghost btn--sm" [href]="item.linkUrl && item.linkUrl !== '#' ? item.linkUrl : item.iframeUrl" target="_blank" rel="noopener">
+        Abrir en una pestaña nueva <app-icon name="external" [size]="15" />
+      </a>
+    </div>
+    }
+    @if (!item.iframeUrl && !item.description) {
+    <p class="modal__text muted">Pronto publicaremos el contenido completo de esta noticia.</p>
+    }
+  </div>
+</app-modal>
+}

@@ -1,86 +1,76 @@
-import { Component, inject, ElementRef, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, inject, ElementRef, ViewChild, AfterViewInit, OnDestroy, signal, computed } from '@angular/core';
 import { ContentService } from '../../../../../core/services/content.service';
+import { Icon } from '../../../../../shared/components/icon/icon';
+import { Modal } from '../../../../../shared/components/modal/modal';
 
 @Component({
   selector: 'app-carousel',
-  imports: [],
+  imports: [Icon, Modal],
   templateUrl: './carousel.html',
   styleUrl: './carousel.scss',
 })
 export class Carousel implements AfterViewInit, OnDestroy {
   private contentService = inject(ContentService);
   slides = this.contentService.slides;
+  cleanPhone = computed(() => this.contentService.contactNumber().replace(/\D/g, ''));
 
   @ViewChild('carouselContainer') carouselContainer!: ElementRef<HTMLElement>;
 
-  currentIndex = 0;
-  private autoPlayInterval: any;
+  currentIndex = signal(0);
+  activeIndex = signal<number | null>(null);
+  activeSlide = computed(() => {
+    const i = this.activeIndex();
+    return i === null ? null : this.slides()[i] ?? null;
+  });
 
-  ngAfterViewInit() {
-    this.startAutoPlay();
-  }
+  private autoPlayInterval?: ReturnType<typeof setInterval>;
+  private scrollRaf = 0;
 
-  ngOnDestroy() {
-    this.stopAutoPlay();
-  }
+  ngAfterViewInit() { this.startAutoPlay(); }
+  ngOnDestroy() { this.stopAutoPlay(); cancelAnimationFrame(this.scrollRaf); }
 
   onScroll() {
-    if (!this.carouselContainer) return;
-    const container = this.carouselContainer.nativeElement;
-    const itemWidth = container.offsetWidth;
-    const scrollLeft = container.scrollLeft;
-    // Calcular el índice basado en la posición del scroll
-    this.currentIndex = Math.round(scrollLeft / itemWidth);
+    cancelAnimationFrame(this.scrollRaf);
+    this.scrollRaf = requestAnimationFrame(() => {
+      const el = this.carouselContainer?.nativeElement;
+      if (!el) return;
+      this.currentIndex.set(Math.round(el.scrollLeft / el.offsetWidth));
+    });
   }
 
   startAutoPlay() {
     this.stopAutoPlay();
-    this.autoPlayInterval = setInterval(() => {
-      this.next();
-    }, 5000); // Cambiar diapositiva cada 5 segundos
+    if (this.activeIndex() !== null) return;
+    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+    this.autoPlayInterval = setInterval(() => this.goTo((this.currentIndex() + 1) % this.slides().length, false), 6500);
   }
 
   stopAutoPlay() {
-    if (this.autoPlayInterval) {
-      clearInterval(this.autoPlayInterval);
-    }
+    if (this.autoPlayInterval) clearInterval(this.autoPlayInterval);
   }
 
-  reStartAutoPlay() {
+  next() { this.goTo((this.currentIndex() + 1) % this.slides().length); }
+  prev() { this.goTo((this.currentIndex() - 1 + this.slides().length) % this.slides().length); }
+
+  goTo(index: number, restart = true) {
+    const el = this.carouselContainer?.nativeElement;
+    if (!el) return;
+    el.scrollTo({ left: index * el.offsetWidth, behavior: 'smooth' });
+    this.currentIndex.set(index);
+    if (restart) this.startAutoPlay();
+  }
+
+  openDetails(index: number) {
+    this.stopAutoPlay();
+    this.activeIndex.set(index);
+  }
+
+  closeDetails() {
+    this.activeIndex.set(null);
     this.startAutoPlay();
   }
 
-  next() {
-    if (!this.carouselContainer) return;
-    const totalSlides = this.slides().length;
-    let nextIndex = this.currentIndex + 1;
-    if (nextIndex >= totalSlides) {
-      nextIndex = 0; // Volver al inicio
-    }
-    this.goTo(nextIndex);
-    this.reStartAutoPlay();
-  }
-
-  prev() {
-    if (!this.carouselContainer) return;
-    const totalSlides = this.slides().length;
-    let prevIndex = this.currentIndex - 1;
-    if (prevIndex < 0) {
-      prevIndex = totalSlides - 1; // Ir al final
-    }
-    this.goTo(prevIndex);
-    this.reStartAutoPlay();
-  }
-
-  goTo(index: number) {
-    if (!this.carouselContainer) return;
-    const container = this.carouselContainer.nativeElement;
-    const itemWidth = container.offsetWidth;
-    container.scrollTo({
-      left: index * itemWidth,
-      behavior: 'smooth'
-    });
-    this.currentIndex = index;
-    this.reStartAutoPlay();
+  whatsappText(title: string) {
+    return encodeURIComponent(`Hola, quiero información sobre el servicio de ${title}.`);
   }
 }

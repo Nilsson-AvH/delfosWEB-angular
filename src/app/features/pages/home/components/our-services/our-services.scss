@@ -1,0 +1,37 @@
+.services__grid {
+  display: grid;
+  gap: 22px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.service {
+  padding: 30px 26px;
+  overflow: hidden;
+}
+.service::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 24px; right: 24px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--orange), transparent);
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+.service:hover::before { opacity: 1; }
+
+.service__icon {
+  display: inline-grid;
+  place-items: center;
+  width: 64px; height: 64px;
+  margin-bottom: 20px;
+  border-radius: 16px;
+  color: var(--orange-neon);
+  background: radial-gradient(circle at 30% 30%, rgba(242, 103, 35, 0.25), rgba(9, 9, 124, 0.25));
+  border: 1px solid rgba(242, 103, 35, 0.45);
+  box-shadow: inset 0 0 18px rgba(242, 103, 35, 0.2), 0 0 18px rgba(242, 103, 35, 0.2);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s;
+}
+.service:hover .service__icon { transform: rotate(-6deg) scale(1.06); box-shadow: inset 0 0 18px rgba(242, 103, 35, 0.3), var(--glow-orange); }
+
+.service h3 { font-size: 2rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+.service p { color: var(--muted); font-size: 1.5rem; }

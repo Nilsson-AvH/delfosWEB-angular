@@ -1,35 +1,71 @@
-<section class="section section-carousel" id="section-carousel">
-    <div class="container-fluid container-carousel">
-        <div class="carousel-wrapper">
-            <button class="carousel-control prev" (click)="prev()" aria-label="Anterior">
-                &#10094;
+<section class="hero" id="section-carousel" aria-roledescription="carrusel" aria-label="Servicios destacados"
+  (mouseenter)="stopAutoPlay()" (mouseleave)="startAutoPlay()">
+  <div class="hero__track" #carouselContainer (scroll)="onScroll()">
+    @for (slide of slides(); track slide.id; let i = $index) {
+    <article class="slide" [attr.aria-label]="(i + 1) + ' de ' + slides().length" [attr.aria-hidden]="currentIndex() !== i">
+      <picture class="slide__media">
+        <source media="(max-width: 799px)" [srcset]="slide.imageMobile" />
+        <img [src]="slide.imageDesktop" [alt]="slide.title + ' - Seguridad Delfos Ltda'"
+          [attr.loading]="i === 0 ? 'eager' : 'lazy'" [attr.fetchpriority]="i === 0 ? 'high' : 'low'"
+          decoding="async" width="1696" height="608" />
+      </picture>
+      <div class="container slide__content">
+        <div class="slide__panel" [class.is-active]="currentIndex() === i">
+          @if (i === 0) {
+          <h1 class="slide__eyebrow">Seguridad privada en Bogotá · Delfos Ltda</h1>
+          } @else {
+          <p class="slide__eyebrow">Seguridad Delfos Ltda</p>
+          }
+          <h2 class="slide__title">{{ slide.title }}</h2>
+          <p class="slide__text">{{ slide.text }}</p>
+          <div class="slide__actions">
+            <button type="button" class="btn btn--primary" (click)="openDetails(i)" [attr.tabindex]="currentIndex() === i ? 0 : -1">
+              {{ slide.linkText || 'Ver más' }} <app-icon name="arrow-right" [size]="18" />
             </button>
-            <div class="carousel" #carouselContainer (scroll)="onScroll()">
-                @for (slide of slides(); track slide.id; let i = $index) {
-                <div class="card card-{{ i + 1 }}">
-                    <picture class="slide-picture">
-                        <source media="(width < 800px)" [srcset]="slide.imageMobile" />
-                        <source media="(width >= 800px)" [srcset]="slide.imageDesktop" />
-                        <img class="img-carousel" [src]="slide.imageDesktop" [alt]="slide.title" />
-                    </picture>
-                    <div class="slide-content">
-                        <h2 class="slide-title">{{ slide.title }}</h2>
-                        <p class="slide-text">{{ slide.text }}</p>
-                        <button class="slide-btn">{{ slide.linkText }}</button>
-                    </div>
-                </div>
-                }
-            </div>
-            <button class="carousel-control next" (click)="next()" aria-label="Siguiente">
-                &#10095;
-            </button>
-
-            <div class="carousel-indicators">
-                @for (slide of slides(); track slide.id; let i = $index) {
-                <button class="dot" [class.active]="currentIndex === i" (click)="goTo(i)"
-                    [attr.aria-label]="'Ir a diapositiva ' + (i + 1)"></button>
-                }
-            </div>
+            <a class="btn btn--ghost" [href]="'https://wa.me/' + cleanPhone()" target="_blank" rel="noopener"
+              [attr.tabindex]="currentIndex() === i ? 0 : -1">Cotizar</a>
+          </div>
         </div>
+      </div>
+    </article>
+    }
+  </div>
+
+  <div class="hero__controls container">
+    <button type="button" class="btn btn--icon" (click)="prev()" aria-label="Diapositiva anterior">
+      <app-icon name="chevron-left" [size]="22" />
+    </button>
+    <div class="dots" role="tablist" aria-label="Seleccionar diapositiva">
+      @for (slide of slides(); track slide.id; let i = $index) {
+      <button type="button" class="dot" role="tab" [class.is-active]="currentIndex() === i" [attr.aria-selected]="currentIndex() === i"
+        (click)="goTo(i)" [attr.aria-label]="'Ir a ' + slide.title"></button>
+      }
     </div>
+    <button type="button" class="btn btn--icon" (click)="next()" aria-label="Diapositiva siguiente">
+      <app-icon name="chevron-right" [size]="22" />
+    </button>
+  </div>
+
+  <div class="hero__progress" aria-hidden="true"><span [style.width.%]="((currentIndex() + 1) / slides().length) * 100"></span></div>
 </section>
+
+@if (activeSlide(); as slide) {
+<app-modal [label]="slide.title" (closed)="closeDetails()">
+  <div class="modal__media">
+    <img [src]="slide.imageMobile || slide.imageDesktop" [alt]="slide.title" loading="lazy">
+  </div>
+  <div class="modal__body">
+    <p class="eyebrow">Servicio Delfos</p>
+    <h3 class="modal__title">{{ slide.title }}</h3>
+    <p class="modal__text">{{ slide.details || slide.text }}</p>
+    <div class="modal__actions">
+      <a class="btn btn--primary" [href]="'https://wa.me/' + cleanPhone() + '?text=' + whatsappText(slide.title)" target="_blank" rel="noopener">
+        <app-icon name="whatsapp" [size]="18" /> Solicitar cotización
+      </a>
+      @if (slide.linkUrl && slide.linkUrl !== '#') {
+      <a class="btn btn--ghost" [href]="slide.linkUrl" target="_blank" rel="noopener">Más información</a>
+      }
+    </div>
+  </div>
+</app-modal>
+}

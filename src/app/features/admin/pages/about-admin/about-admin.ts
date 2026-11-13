@@ -1,110 +1,56 @@
 import { Component, inject, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ContentService } from '../../../../core/services/content.service';
 import { AboutUsItem } from '../../../../core/models/content.interface';
-import { FormsModule } from '@angular/forms';
+import { CollectionEditor, ColumnDef, FieldDef } from '../../components/collection-editor';
+import { Icon } from '../../../../shared/components/icon/icon';
 
 @Component({
-    selector: 'app-about-admin',
-    imports: [FormsModule],
-    template: `
-    <div class="admin-page">
-      <h2>Manage About Us</h2>
-      
-      <!-- Title Section -->
-      <div class="section-config">
-        <label>Section Title:</label>
-        <input type="text" [ngModel]="contentService.aboutUsTitle()" (ngModelChange)="updateTitle($event)" class="title-input">
-      </div>
+  selector: 'app-about-admin',
+  imports: [FormsModule, CollectionEditor, Icon],
+  template: `
+    <div class="adm-page">
+      <header class="adm-page__head">
+        <h1>Nosotros</h1>
+        <p>Tarjetas de la sección “Nosotros” (experiencia, historia, misión…). Cada tarjeta abre una ventana con su descripción.</p>
+      </header>
 
-      <!-- List View -->
-      @if (!isEditing()) {
-        <table class="data-table">
-            <thead>
-                <tr>
-                    <th>Image</th>
-                    <th>Title</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (item of items(); track item.id) {
-                <tr>
-                    <td><img [src]="item.imageUrl" height="50"></td>
-                    <td>{{ item.title }}</td>
-                    <td>
-                        <button class="btn-sm" (click)="edit(item)">Edit</button>
-                    </td>
-                </tr>
-                }
-            </tbody>
-        </table>
-      }
-
-      <!-- Edit Form -->
-      @if (isEditing()) {
-        <div class="edit-form">
-            <h3>Edit About Us Item</h3>
-            <form (ngSubmit)="save()">
-                <div class="form-group">
-                    <label>Title</label>
-                    <input type="text" [(ngModel)]="currentItem().title" name="title" required>
-                </div>
-                <div class="form-group">
-                    <label>Image URL</label>
-                    <input type="text" [(ngModel)]="currentItem().imageUrl" name="imageUrl" required>
-                </div>
-                <div class="form-group">
-                    <label>Description (Modal Content)</label>
-                    <textarea [(ngModel)]="currentItem().description" name="description" rows="4"></textarea>
-                </div>
-                
-                <div class="form-actions">
-                    <button type="submit" class="btn-primary">Save</button>
-                    <button type="button" class="btn-secondary" (click)="cancel()">Cancel</button>
-                </div>
-            </form>
+      <section class="adm-card">
+        <header class="adm-card__head"><div><h2>Título de la sección</h2></div></header>
+        <div class="field">
+          <label for="about-title">Título</label>
+          <input id="about-title" class="input" [(ngModel)]="title" name="title">
         </div>
-      }
+        <div class="adm-actions">
+          <button type="button" class="btn btn--primary btn--sm" (click)="content.updateAboutUsTitle(title())"><app-icon name="save" [size]="15" /> Guardar título</button>
+        </div>
+      </section>
+
+      <app-collection-editor heading="Tarjetas" itemName="tarjeta" [items]="content.aboutUsItems()"
+        [fields]="fields" [columns]="columns" [blank]="blank"
+        (saved)="save($event)" (removed)="content.deleteAboutUsItem($event)" />
     </div>
   `,
-    styles: `
-    .admin-page { padding: 20px; }
-    .section-config { background: #ecf0f1; padding: 15px; border-radius: 4px; margin-bottom: 20px; }
-    .title-input { width: 100%; max-width: 500px; padding: 8px; }
-    .data-table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; }
-    .data-table th, .data-table td { padding: 12px; border-bottom: 1px solid #ddd; text-align: left; }
-    .btn-primary { background: #F26723; color: white; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; }
-    .btn-secondary { background: #95a5a6; color: white; padding: 8px 16px; border: none; border-radius: 4px; margin-left: 10px; cursor: pointer; }
-    .edit-form { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-width: 500px; margin: 20px auto; }
-    .form-group { margin-bottom: 15px; }
-    .form-group label { display: block; margin-bottom: 5px; }
-    .form-group input, .form-group textarea { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
-    .form-group textarea { resize: vertical; }
-  `
 })
 export class AboutAdmin {
-    contentService = inject(ContentService);
-    items = this.contentService.aboutUsItems;
+  content = inject(ContentService);
+  title = signal(this.content.aboutUsTitle());
 
-    isEditing = signal(false);
-    currentItem = signal<AboutUsItem>({ id: '', title: '', imageUrl: '', description: '' });
+  blank: AboutUsItem = { title: '', imageUrl: '', description: '' };
+  columns: ColumnDef[] = [
+    { key: 'imageUrl', label: 'Imagen', type: 'image' },
+    { key: 'title', label: 'Título' },
+    { key: 'description', label: 'Descripción' },
+  ];
+  fields: FieldDef[] = [
+    { key: 'title', label: 'Título', required: true, full: true },
+    { key: 'description', label: 'Descripción', type: 'textarea', required: true },
+    { key: 'imageUrl', label: 'Imagen', type: 'image', required: true },
+  ];
 
-    updateTitle(val: string) { this.contentService.updateAboutUsTitle(val); }
-
-    edit(item: AboutUsItem) {
-        this.currentItem.set({ ...item });
-        this.isEditing.set(true);
-    }
-
-    save() {
-        const item = this.currentItem();
-        if (item.id) {
-            this.contentService.updateAboutUsItem(item.id, item);
-        }
-        this.isEditing.set(false);
-    }
-
-    cancel() {
-        this.isEditing.set(false);
-    }
+  save(item: Record<string, any>) {
+    const it = item as AboutUsItem;
+    if (this.content.aboutUsItems().some(x => x.id === it.id)) this.content.updateAboutUsItem(it.id!, it);
+    else this.content.addAboutUsItem(it);
+  }
 }

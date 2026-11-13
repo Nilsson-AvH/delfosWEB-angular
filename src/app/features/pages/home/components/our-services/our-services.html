@@ -1,16 +1,18 @@
-<section id="section-services" class="section section-our-services our-services">
-    <div class="container">
-        <h2>{{ title() }}</h2>
-        <h2>{{ subtitle() }}</h2>
-        <div class="cards-service">
-            @for (service of services(); track service.id) {
-            <div class="card-service-1 hover-effect-global">
-                <i [class]="service.iconBg"></i>
-                <i [class]="service.icon"></i>
-                <h3>{{ service.title }}</h3>
-                <p>{{ service.description }}</p>
-            </div>
-            }
-        </div>
+<section id="section-services" class="section section--alt services">
+  <div class="container">
+    <header class="section-head" appReveal>
+      <p class="eyebrow">{{ subtitle() }}</p>
+      <h2 class="section-title">{{ title() }}</h2>
+    </header>
+
+    <div class="services__grid">
+      @for (service of services(); track service.id; let i = $index) {
+      <article class="service card-glass card-glass--hover" appReveal [revealDelay]="(i % 3) * 90">
+        <span class="service__icon"><app-icon [name]="service.icon" [size]="30" [stroke]="1.6" /></span>
+        <h3>{{ service.title }}</h3>
+        <p>{{ service.description }}</p>
+      </article>
+      }
     </div>
+  </div>
 </section>

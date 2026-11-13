@@ -1,4 +1,8 @@
+# Seguridad Delfos Ltda - https://seguridaddelfos.com
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /login
+Disallow: /assets/data.json
 
-Sitemap: https://www.seguridaddelfos.com/sitemap.xml
+Sitemap: https://seguridaddelfos.com/sitemap.xml
